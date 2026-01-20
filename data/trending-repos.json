@@ -1,0 +1,698 @@
+{
+  "metadata": {
+    "report_title": "GitHub趋势排行榜 - 2026年第4周",
+    "year": 2026,
+    "week": 4,
+    "week_range": {
+      "start": "2026-01-18",
+      "end": "2026-01-24"
+    },
+    "total_repositories": 10,
+    "generation_date": "2026-01-20 12:44:32",
+    "next_update": "2026-01-27"
+  },
+  "repositories": [
+    {
+      "rank": 1,
+      "name": "json-render",
+      "full_name": "vercel-labs/json-render",
+      "owner": "vercel-labs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/108547162?v=4",
+      "stars": 7304,
+      "forks": 345,
+      "issues": 21,
+      "watchers": 7304,
+      "description": "AI → JSON → UI",
+      "homepage": "https://json-render.dev",
+      "clone_url": "https://github.com/vercel-labs/json-render.git",
+      "ssh_url": "git@github.com:vercel-labs/json-render.git",
+      "html_url": "https://github.com/vercel-labs/json-render",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 331002,
+        "CSS": 3675,
+        "JavaScript": 2581
+      },
+      "tech_stack": [
+        "TypeScript",
+        "CSS",
+        "JavaScript",
+        "React"
+      ],
+      "topics": [],
+      "created_at": "2026-01-14T17:22:39Z",
+      "updated_at": "2026-01-20T04:42:42Z",
+      "pushed_at": "2026-01-17T04:45:16Z",
+      "ai_summary": {
+        "summary": "AI → JSON → UI",
+        "highlights": [
+          "7,304 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\json-render",
+        "representative_image": null
+      },
+      "activity_score": 68,
+      "popularity_score": 77,
+      "freshness_score": 100,
+      "overall_score": 79,
+      "trend": {
+        "status": "rising",
+        "star_change": 3011,
+        "rank_change": 2,
+        "is_new": false,
+        "last_week_rank": 3,
+        "last_week_stars": 4293
+      }
+    },
+    {
+      "rank": 2,
+      "name": "openwork",
+      "full_name": "different-ai/openwork",
+      "owner": "different-ai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/118544361?v=4",
+      "stars": 3477,
+      "forks": 249,
+      "issues": 28,
+      "watchers": 3477,
+      "description": "An open-source alternative to Claude Cowork, powered by OpenCode",
+      "homepage": "https://openwork.software",
+      "clone_url": "https://github.com/different-ai/openwork.git",
+      "ssh_url": "git@github.com:different-ai/openwork.git",
+      "html_url": "https://github.com/different-ai/openwork",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 440494,
+        "Rust": 57470,
+        "JavaScript": 33458,
+        "CSS": 751,
+        "HTML": 580
+      },
+      "tech_stack": [
+        "TypeScript",
+        "Rust",
+        "JavaScript",
+        "CSS",
+        "HTML",
+        "Node.js"
+      ],
+      "topics": [],
+      "created_at": "2026-01-14T01:39:31Z",
+      "updated_at": "2026-01-20T04:42:48Z",
+      "pushed_at": "2026-01-20T04:44:06Z",
+      "ai_summary": {
+        "summary": "An open-source alternative to Claude Cowork, powered by OpenCode",
+        "highlights": [
+          "3,477 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\openwork",
+        "representative_image": null
+      },
+      "activity_score": 72,
+      "popularity_score": 72,
+      "freshness_score": 100,
+      "overall_score": 78,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 3,
+      "name": "1code",
+      "full_name": "21st-dev/1code",
+      "owner": "21st-dev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/199367026?v=4",
+      "stars": 3342,
+      "forks": 286,
+      "issues": 26,
+      "watchers": 3342,
+      "description": "Better UI app for running code agents in parallel (ClaudeCode, OpenCode, Codex)",
+      "homepage": "",
+      "clone_url": "https://github.com/21st-dev/1code.git",
+      "ssh_url": "git@github.com:21st-dev/1code.git",
+      "html_url": "https://github.com/21st-dev/1code",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 2875454,
+        "JavaScript": 23036,
+        "CSS": 16114,
+        "HTML": 10851,
+        "Shell": 3398
+      },
+      "tech_stack": [
+        "TypeScript",
+        "JavaScript",
+        "CSS",
+        "HTML",
+        "Shell"
+      ],
+      "topics": [],
+      "created_at": "2026-01-14T02:12:40Z",
+      "updated_at": "2026-01-20T04:42:07Z",
+      "pushed_at": "2026-01-19T10:16:55Z",
+      "ai_summary": {
+        "summary": "Better UI app for running code agents in parallel (ClaudeCode, OpenCode, Codex)",
+        "highlights": [
+          "3,342 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_worktree.gif",
+            "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\1code\\1_worktree.gif",
+            "size": 1536010,
+            "content_type": "image/gif",
+            "downloaded_at": "2026-01-20T04:44:26.350Z",
+            "original_url": "assets/worktree.gif",
+            "absolute_url": "https://raw.githubusercontent.com/21st-dev/1code/main/assets/worktree.gif"
+          }
+        ],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\1code",
+        "representative_image": {
+          "filename": "1_worktree.gif",
+          "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\1code\\1_worktree.gif",
+          "size": 1536010,
+          "content_type": "image/gif",
+          "downloaded_at": "2026-01-20T04:44:26.350Z",
+          "original_url": "assets/worktree.gif",
+          "absolute_url": "https://raw.githubusercontent.com/21st-dev/1code/main/assets/worktree.gif"
+        }
+      },
+      "activity_score": 71,
+      "popularity_score": 73,
+      "freshness_score": 100,
+      "overall_score": 78,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 4,
+      "name": "openwork",
+      "full_name": "accomplish-ai/openwork",
+      "owner": "accomplish-ai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/244819219?v=4",
+      "stars": 1983,
+      "forks": 297,
+      "issues": 37,
+      "watchers": 1983,
+      "description": "Openwork™ is the open source Al coworker that lives on your desktop",
+      "homepage": "https://openwork.me",
+      "clone_url": "https://github.com/accomplish-ai/openwork.git",
+      "ssh_url": "git@github.com:accomplish-ai/openwork.git",
+      "html_url": "https://github.com/accomplish-ai/openwork",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 1205070,
+        "JavaScript": 28375,
+        "Shell": 8335,
+        "CSS": 3685,
+        "Dockerfile": 1373,
+        "HTML": 1068
+      },
+      "tech_stack": [
+        "TypeScript",
+        "JavaScript",
+        "Shell",
+        "CSS",
+        "Dockerfile",
+        "HTML",
+        "React",
+        "Node.js"
+      ],
+      "topics": [],
+      "created_at": "2026-01-14T12:22:38Z",
+      "updated_at": "2026-01-20T04:42:17Z",
+      "pushed_at": "2026-01-19T22:15:36Z",
+      "ai_summary": {
+        "summary": "Openwork™ is the open source Al coworker that lives on your desktop",
+        "highlights": [
+          "1,983 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_banner.svg",
+            "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\openwork\\1_banner.svg",
+            "size": 52929,
+            "content_type": "image/svg+xml",
+            "downloaded_at": "2026-01-20T04:44:27.606Z",
+            "original_url": "docs/banner.svg",
+            "absolute_url": "https://raw.githubusercontent.com/accomplish-ai/openwork/main/docs/banner.svg"
+          }
+        ],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\openwork",
+        "representative_image": {
+          "filename": "1_banner.svg",
+          "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\openwork\\1_banner.svg",
+          "size": 52929,
+          "content_type": "image/svg+xml",
+          "downloaded_at": "2026-01-20T04:44:27.606Z",
+          "original_url": "docs/banner.svg",
+          "absolute_url": "https://raw.githubusercontent.com/accomplish-ai/openwork/main/docs/banner.svg"
+        }
+      },
+      "activity_score": 78,
+      "popularity_score": 70,
+      "freshness_score": 100,
+      "overall_score": 78,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 5,
+      "name": "everything-claude-code",
+      "full_name": "affaan-m/everything-claude-code",
+      "owner": "affaan-m",
+      "avatar_url": "https://avatars.githubusercontent.com/u/124439313?v=4",
+      "stars": 3631,
+      "forks": 484,
+      "issues": 2,
+      "watchers": 3631,
+      "description": "Complete Claude Code configuration collection - agents, skills, hooks, commands, rules, MCPs. Battle-tested configs from an Anthropic hackathon winner.",
+      "homepage": null,
+      "clone_url": "https://github.com/affaan-m/everything-claude-code.git",
+      "ssh_url": "git@github.com:affaan-m/everything-claude-code.git",
+      "html_url": "https://github.com/affaan-m/everything-claude-code",
+      "language": null,
+      "primary_language": "Unknown",
+      "languages": {},
+      "tech_stack": [
+        "React",
+        "Django",
+        "Kubernetes",
+        "AWS",
+        "Terraform"
+      ],
+      "topics": [],
+      "created_at": "2026-01-18T00:51:51Z",
+      "updated_at": "2026-01-20T04:43:13Z",
+      "pushed_at": "2026-01-18T02:14:33Z",
+      "ai_summary": {
+        "summary": "Complete Claude Code configuration collection - agents, skills, hooks, commands, rules, MCPs. Battle-tested configs from an Anthropic hackathon winner.",
+        "highlights": [
+          "3,631 stars",
+          "多语言"
+        ],
+        "tech_summary": "多种技术",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\everything-claude-code",
+        "representative_image": null
+      },
+      "activity_score": 59,
+      "popularity_score": 75,
+      "freshness_score": 100,
+      "overall_score": 75,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 6,
+      "name": "antigravity-kit",
+      "full_name": "vudovn/antigravity-kit",
+      "owner": "vudovn",
+      "avatar_url": "https://avatars.githubusercontent.com/u/116963762?v=4",
+      "stars": 1503,
+      "forks": 295,
+      "issues": 4,
+      "watchers": 1503,
+      "description": "",
+      "homepage": "https://antigravity-kit.vercel.app",
+      "clone_url": "https://github.com/vudovn/antigravity-kit.git",
+      "ssh_url": "git@github.com:vudovn/antigravity-kit.git",
+      "html_url": "https://github.com/vudovn/antigravity-kit",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 349660,
+        "Python": 239500,
+        "CSS": 4208,
+        "JavaScript": 559
+      },
+      "tech_stack": [
+        "TypeScript",
+        "Python",
+        "CSS",
+        "JavaScript",
+        "React"
+      ],
+      "topics": [],
+      "created_at": "2026-01-14T09:06:28Z",
+      "updated_at": "2026-01-20T04:42:47Z",
+      "pushed_at": "2026-01-19T13:02:16Z",
+      "ai_summary": {
+        "summary": "暂无项目描述",
+        "highlights": [
+          "1,503 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\antigravity-kit",
+        "representative_image": null
+      },
+      "activity_score": 58,
+      "popularity_score": 68,
+      "freshness_score": 100,
+      "overall_score": 71,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 7,
+      "name": "add-skill",
+      "full_name": "vercel-labs/add-skill",
+      "owner": "vercel-labs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/108547162?v=4",
+      "stars": 1423,
+      "forks": 76,
+      "issues": 17,
+      "watchers": 1423,
+      "description": "",
+      "homepage": null,
+      "clone_url": "https://github.com/vercel-labs/add-skill.git",
+      "ssh_url": "git@github.com:vercel-labs/add-skill.git",
+      "html_url": "https://github.com/vercel-labs/add-skill",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 37247,
+        "JavaScript": 15933
+      },
+      "tech_stack": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "topics": [],
+      "created_at": "2026-01-14T21:31:18Z",
+      "updated_at": "2026-01-20T04:42:28Z",
+      "pushed_at": "2026-01-20T00:12:18Z",
+      "ai_summary": {
+        "summary": "暂无项目描述",
+        "highlights": [
+          "1,423 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\add-skill",
+        "representative_image": null
+      },
+      "activity_score": 62,
+      "popularity_score": 64,
+      "freshness_score": 100,
+      "overall_score": 71,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 8,
+      "name": "skills",
+      "full_name": "trailofbits/skills",
+      "owner": "trailofbits",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2314423?v=4",
+      "stars": 1466,
+      "forks": 113,
+      "issues": 7,
+      "watchers": 1466,
+      "description": "Trail of Bits Claude Code skills for security research, vulnerability detection, and audit workflows",
+      "homepage": "",
+      "clone_url": "https://github.com/trailofbits/skills.git",
+      "ssh_url": "git@github.com:trailofbits/skills.git",
+      "html_url": "https://github.com/trailofbits/skills",
+      "language": "Python",
+      "primary_language": "Python",
+      "languages": {
+        "Python": 301687,
+        "CodeQL": 12064,
+        "C": 8714,
+        "Swift": 5459,
+        "C#": 5442,
+        "Ruby": 5419,
+        "Java": 5221,
+        "JavaScript": 5033,
+        "Kotlin": 5019,
+        "TypeScript": 4645,
+        "PHP": 3832,
+        "Shell": 3035,
+        "Rust": 2608,
+        "Go": 2213
+      },
+      "tech_stack": [
+        "Python",
+        "CodeQL",
+        "C",
+        "Swift",
+        "C#",
+        "Ruby",
+        "Java",
+        "JavaScript"
+      ],
+      "topics": [
+        "agent-skills"
+      ],
+      "created_at": "2026-01-14T18:23:21Z",
+      "updated_at": "2026-01-20T04:38:36Z",
+      "pushed_at": "2026-01-19T02:30:32Z",
+      "ai_summary": {
+        "summary": "Trail of Bits Claude Code skills for security research, vulnerability detection, and audit workflows",
+        "highlights": [
+          "1,466 stars",
+          "Python"
+        ],
+        "tech_summary": "Python",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\skills",
+        "representative_image": null
+      },
+      "activity_score": 55,
+      "popularity_score": 65,
+      "freshness_score": 100,
+      "overall_score": 69,
+      "trend": {
+        "status": "rising",
+        "star_change": 466,
+        "rank_change": 1,
+        "is_new": false,
+        "last_week_rank": 9,
+        "last_week_stars": 1000
+      }
+    },
+    {
+      "rank": 9,
+      "name": "humanizer",
+      "full_name": "blader/humanizer",
+      "owner": "blader",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1672?v=4",
+      "stars": 1288,
+      "forks": 93,
+      "issues": 5,
+      "watchers": 1288,
+      "description": "Claude Code skill that removes signs of AI-generated writing from text",
+      "homepage": null,
+      "clone_url": "https://github.com/blader/humanizer.git",
+      "ssh_url": "git@github.com:blader/humanizer.git",
+      "html_url": "https://github.com/blader/humanizer",
+      "language": null,
+      "primary_language": "Unknown",
+      "languages": {},
+      "tech_stack": [],
+      "topics": [],
+      "created_at": "2026-01-18T05:30:15Z",
+      "updated_at": "2026-01-20T04:39:01Z",
+      "pushed_at": "2026-01-19T07:57:39Z",
+      "ai_summary": {
+        "summary": "Claude Code skill that removes signs of AI-generated writing from text",
+        "highlights": [
+          "1,288 stars",
+          "多语言"
+        ],
+        "tech_summary": "多种技术",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\humanizer",
+        "representative_image": null
+      },
+      "activity_score": 55,
+      "popularity_score": 64,
+      "freshness_score": 100,
+      "overall_score": 69,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 10,
+      "name": "Claudeception",
+      "full_name": "blader/Claudeception",
+      "owner": "blader",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1672?v=4",
+      "stars": 914,
+      "forks": 81,
+      "issues": 6,
+      "watchers": 914,
+      "description": "A Claude Code skill for autonomous skill extraction and continuous learning. Have Claude Code get smarter as it works.",
+      "homepage": null,
+      "clone_url": "https://github.com/blader/Claudeception.git",
+      "ssh_url": "git@github.com:blader/Claudeception.git",
+      "html_url": "https://github.com/blader/Claudeception",
+      "language": "Shell",
+      "primary_language": "Shell",
+      "languages": {
+        "Shell": 1770
+      },
+      "tech_stack": [
+        "Shell",
+        "TypeScript",
+        "AWS"
+      ],
+      "topics": [],
+      "created_at": "2026-01-17T19:03:02Z",
+      "updated_at": "2026-01-20T04:42:12Z",
+      "pushed_at": "2026-01-18T23:20:45Z",
+      "ai_summary": {
+        "summary": "A Claude Code skill for autonomous skill extraction and continuous learning. Have Claude Code get smarter as it works.",
+        "highlights": [
+          "914 stars",
+          "Shell"
+        ],
+        "tech_summary": "Shell",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-4\\claudeception",
+        "representative_image": null
+      },
+      "activity_score": 54,
+      "popularity_score": 61,
+      "freshness_score": 100,
+      "overall_score": 67,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    }
+  ],
+  "statistics": {
+    "total_stars": 26331,
+    "total_forks": 2319,
+    "average_stars": 2633,
+    "average_forks": 232,
+    "top_languages": [
+      {
+        "name": "TypeScript",
+        "count": 6
+      },
+      {
+        "name": "Unknown",
+        "count": 2
+      },
+      {
+        "name": "Python",
+        "count": 1
+      },
+      {
+        "name": "Shell",
+        "count": 1
+      }
+    ],
+    "top_topics": [
+      {
+        "name": "agent-skills",
+        "count": 1
+      }
+    ],
+    "score_distribution": {
+      "min": 67,
+      "max": 79,
+      "average": 74,
+      "median": 73
+    }
+  },
+  "generated_at": "2026-01-20T04:44:32.676Z"
+}

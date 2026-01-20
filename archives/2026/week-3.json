@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "report_title": "GitHub趋势排行榜 - 2026年第3周",
+    "year": 2026,
+    "week": 3,
+    "week_range": {
+      "start": "2026-01-11",
+      "end": "2026-01-17"
+    },
+    "total_repositories": 10,
+    "generation_date": "2026-01-16 18:11:34",
+    "next_update": "2026-01-23"
+  },
+  "repositories": [
+    {
+      "full_name": "vercel-labs/agent-browser",
+      "rank": 1,
+      "stars": 6568,
+      "forks": 297,
+      "overall_score": 83
+    },
+    {
+      "full_name": "ZhuLinsen/daily_stock_analysis",
+      "rank": 2,
+      "stars": 2133,
+      "forks": 1992,
+      "overall_score": 82
+    },
+    {
+      "full_name": "vercel-labs/json-render",
+      "rank": 3,
+      "stars": 4293,
+      "forks": 182,
+      "overall_score": 74
+    },
+    {
+      "full_name": "z-libs/Zen-C",
+      "rank": 4,
+      "stars": 2693,
+      "forks": 115,
+      "overall_score": 73
+    },
+    {
+      "full_name": "DevAgentForge/Claude-Cowork",
+      "rank": 5,
+      "stars": 1398,
+      "forks": 204,
+      "overall_score": 73
+    },
+    {
+      "full_name": "deepseek-ai/Engram",
+      "rank": 6,
+      "stars": 2574,
+      "forks": 140,
+      "overall_score": 71
+    },
+    {
+      "full_name": "subsy/ralph-tui",
+      "rank": 7,
+      "stars": 816,
+      "forks": 83,
+      "overall_score": 69
+    },
+    {
+      "full_name": "1rgs/nanocode",
+      "rank": 8,
+      "stars": 1296,
+      "forks": 107,
+      "overall_score": 68
+    },
+    {
+      "full_name": "trailofbits/skills",
+      "rank": 9,
+      "stars": 1000,
+      "forks": 70,
+      "overall_score": 66
+    },
+    {
+      "full_name": "KartikLabhshetwar/better-shot",
+      "rank": 10,
+      "stars": 822,
+      "forks": 47,
+      "overall_score": 66
+    }
+  ],
+  "generated_at": "2026-01-16T10:11:34.286Z"
+}

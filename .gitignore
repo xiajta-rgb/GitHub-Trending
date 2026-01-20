@@ -1,0 +1,128 @@
+# ===========================================
+# GitHub Trending 排行榜项目 - Git忽略文件
+# ===========================================
+
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+
+# 依赖文件
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# package-lock.json  # 注释掉，我们需要这个文件
+yarn.lock
+
+# 运行时数据
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# 临时文件
+.tmp/
+temp/
+*.tmp
+*.temp
+
+# 日志文件
+logs/
+*.log
+
+# 缓存文件
+.cache/
+.npm
+.eslintcache
+
+# 编辑器和IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 操作系统文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 构建输出
+dist/
+build/
+out/
+
+# 覆盖率报告
+coverage/
+*.lcov
+
+# 备份文件 (可选，根据需要调整)
+backups/
+
+# 数据文件 (本地测试数据，生产环境请谨慎)
+# data/
+# archives/
+# images/
+
+# ===========================================
+# 项目特定忽略
+# ===========================================
+
+# AI缓存文件
+ai-cache/
+
+# 错误报告
+error-reports/
+
+# 性能分析文件
+profiles/
+
+# 测试输出
+test-output/
+
+# ===========================================
+# 安全相关 - 绝对不能提交的文件
+# ===========================================
+
+# API密钥文件
+**/secrets/*
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+
+# 配置文件中的敏感信息
+config/production.js
+config/secrets.json
+
+# 数据库文件
+*.db
+*.sqlite
+*.sqlite3
+
+# ===========================================
+# 可选忽略 (根据项目需求调整)
+# ===========================================
+
+# 如果不想提交图片文件到仓库 (节省空间)
+# images/
+
+# 如果不想提交历史数据 (节省空间)
+# archives/*/
+
+# 如果使用Docker
+# Dockerfile.local
+# docker-compose.override.yml
+
+# ===========================================
+# 注意事项
+# ===========================================
+# 1. 永远不要提交包含真实API密钥的文件
+# 2. 定期检查是否有敏感信息被意外提交
+# 3. 使用 git log --all --full-history -- 文件名 检查文件历史
+# 4. 如果意外提交了敏感信息，立即更换密钥并清理Git历史

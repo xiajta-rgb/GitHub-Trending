@@ -1,0 +1,792 @@
+{
+  "metadata": {
+    "report_title": "GitHub趋势排行榜 - 2026年第3周",
+    "year": 2026,
+    "week": 3,
+    "week_range": {
+      "start": "2026-01-11",
+      "end": "2026-01-17"
+    },
+    "total_repositories": 10,
+    "generation_date": "2026-01-16 18:11:34",
+    "next_update": "2026-01-23"
+  },
+  "repositories": [
+    {
+      "rank": 1,
+      "name": "agent-browser",
+      "full_name": "vercel-labs/agent-browser",
+      "owner": "vercel-labs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/108547162?v=4",
+      "stars": 6568,
+      "forks": 297,
+      "issues": 83,
+      "watchers": 6568,
+      "description": "Browser automation CLI for AI agents",
+      "homepage": "https://agent-browser.dev",
+      "clone_url": "https://github.com/vercel-labs/agent-browser.git",
+      "ssh_url": "git@github.com:vercel-labs/agent-browser.git",
+      "html_url": "https://github.com/vercel-labs/agent-browser",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 217652,
+        "Rust": 117688,
+        "JavaScript": 6824,
+        "Shell": 2801,
+        "Batchfile": 102
+      },
+      "tech_stack": [
+        "TypeScript",
+        "Rust",
+        "JavaScript",
+        "Shell",
+        "Batchfile",
+        "Node.js",
+        "AWS"
+      ],
+      "topics": [],
+      "created_at": "2026-01-11T05:38:15Z",
+      "updated_at": "2026-01-16T10:04:40Z",
+      "pushed_at": "2026-01-14T03:54:20Z",
+      "ai_summary": {
+        "summary": "Browser automation CLI for AI agents",
+        "highlights": [
+          "6,568 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\agent-browser",
+        "representative_image": null
+      },
+      "activity_score": 84,
+      "popularity_score": 76,
+      "freshness_score": 100,
+      "overall_score": 83,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 2,
+      "name": "daily_stock_analysis",
+      "full_name": "ZhuLinsen/daily_stock_analysis",
+      "owner": "ZhuLinsen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42829555?v=4",
+      "stars": 2133,
+      "forks": 1992,
+      "issues": 17,
+      "watchers": 2133,
+      "description": "LLM驱动的 A 股智能分析器，多数据源行情 + 实时新闻 + Gemini 决策仪表盘 + 多渠道推送，零成本，纯白嫖，定时运行",
+      "homepage": "",
+      "clone_url": "https://github.com/ZhuLinsen/daily_stock_analysis.git",
+      "ssh_url": "git@github.com:ZhuLinsen/daily_stock_analysis.git",
+      "html_url": "https://github.com/ZhuLinsen/daily_stock_analysis",
+      "language": "Python",
+      "primary_language": "Python",
+      "languages": {
+        "Python": 344326,
+        "Dockerfile": 1218
+      },
+      "tech_stack": [
+        "Python",
+        "Dockerfile",
+        "agent",
+        "ai",
+        "aigc",
+        "gemini",
+        "llm",
+        "quant"
+      ],
+      "topics": [
+        "agent",
+        "ai",
+        "aigc",
+        "gemini",
+        "llm",
+        "quant",
+        "quantitative-trading",
+        "rag",
+        "stock"
+      ],
+      "created_at": "2026-01-10T06:43:20Z",
+      "updated_at": "2026-01-16T10:02:48Z",
+      "pushed_at": "2026-01-15T13:27:41Z",
+      "ai_summary": {
+        "summary": "LLM驱动的 A 股智能分析器，多数据源行情 + 实时新闻 + Gemini 决策仪表盘 + 多渠道推送，零成本，纯白嫖，定时运行",
+        "highlights": [
+          "2,133 stars",
+          "Python"
+        ],
+        "tech_summary": "Python",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_badge.svg",
+            "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\daily_stock_analysis\\1_badge.svg",
+            "size": 2263,
+            "content_type": "image/svg+xml; charset=utf-8",
+            "downloaded_at": "2026-01-16T10:11:08.135Z",
+            "original_url": "https://github.com/ZhuLinsen/daily_stock_analysis/actions/workflows/ci.yml/badge.svg",
+            "absolute_url": "https://github.com/ZhuLinsen/daily_stock_analysis/actions/workflows/ci.yml/badge.svg"
+          }
+        ],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\daily_stock_analysis",
+        "representative_image": {
+          "filename": "1_badge.svg",
+          "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\daily_stock_analysis\\1_badge.svg",
+          "size": 2263,
+          "content_type": "image/svg+xml; charset=utf-8",
+          "downloaded_at": "2026-01-16T10:11:08.135Z",
+          "original_url": "https://github.com/ZhuLinsen/daily_stock_analysis/actions/workflows/ci.yml/badge.svg",
+          "absolute_url": "https://github.com/ZhuLinsen/daily_stock_analysis/actions/workflows/ci.yml/badge.svg"
+        }
+      },
+      "activity_score": 80,
+      "popularity_score": 76,
+      "freshness_score": 100,
+      "overall_score": 82,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 3,
+      "name": "json-render",
+      "full_name": "vercel-labs/json-render",
+      "owner": "vercel-labs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/108547162?v=4",
+      "stars": 4293,
+      "forks": 182,
+      "issues": 7,
+      "watchers": 4293,
+      "description": "AI → JSON → UI",
+      "homepage": "https://json-render.dev",
+      "clone_url": "https://github.com/vercel-labs/json-render.git",
+      "ssh_url": "git@github.com:vercel-labs/json-render.git",
+      "html_url": "https://github.com/vercel-labs/json-render",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 271939,
+        "CSS": 3673,
+        "JavaScript": 2581
+      },
+      "tech_stack": [
+        "TypeScript",
+        "CSS",
+        "JavaScript",
+        "React"
+      ],
+      "topics": [],
+      "created_at": "2026-01-14T17:22:39Z",
+      "updated_at": "2026-01-16T10:09:30Z",
+      "pushed_at": "2026-01-15T04:05:01Z",
+      "ai_summary": {
+        "summary": "AI → JSON → UI",
+        "highlights": [
+          "4,293 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\json-render",
+        "representative_image": null
+      },
+      "activity_score": 57,
+      "popularity_score": 73,
+      "freshness_score": 100,
+      "overall_score": 74,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 4,
+      "name": "Zen-C",
+      "full_name": "z-libs/Zen-C",
+      "owner": "z-libs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/245714965?v=4",
+      "stars": 2693,
+      "forks": 115,
+      "issues": 14,
+      "watchers": 2693,
+      "description": "Write like a high-level language, run like C.",
+      "homepage": "",
+      "clone_url": "https://github.com/z-libs/Zen-C.git",
+      "ssh_url": "git@github.com:z-libs/Zen-C.git",
+      "html_url": "https://github.com/z-libs/Zen-C",
+      "language": "C",
+      "primary_language": "C",
+      "languages": {
+        "C": 588426,
+        "Makefile": 2943,
+        "Shell": 1560,
+        "Nix": 969
+      },
+      "tech_stack": [
+        "C",
+        "Makefile",
+        "Shell",
+        "Nix",
+        "Express"
+      ],
+      "topics": [],
+      "created_at": "2026-01-11T15:08:19Z",
+      "updated_at": "2026-01-16T10:07:56Z",
+      "pushed_at": "2026-01-16T10:07:52Z",
+      "ai_summary": {
+        "summary": "Write like a high-level language, run like C.",
+        "highlights": [
+          "2,693 stars",
+          "C"
+        ],
+        "tech_summary": "C",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\zen-c",
+        "representative_image": null
+      },
+      "activity_score": 61,
+      "popularity_score": 69,
+      "freshness_score": 100,
+      "overall_score": 73,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 5,
+      "name": "Claude-Cowork",
+      "full_name": "DevAgentForge/Claude-Cowork",
+      "owner": "DevAgentForge",
+      "avatar_url": "https://avatars.githubusercontent.com/u/253069662?v=4",
+      "stars": 1398,
+      "forks": 204,
+      "issues": 20,
+      "watchers": 1398,
+      "description": "OpenSource Claude Cowork. A desktop AI assistant that helps you with programming, file management, and any task you can describe.",
+      "homepage": null,
+      "clone_url": "https://github.com/DevAgentForge/Claude-Cowork.git",
+      "ssh_url": "git@github.com:DevAgentForge/Claude-Cowork.git",
+      "html_url": "https://github.com/DevAgentForge/Claude-Cowork",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 94342,
+        "CSS": 5329,
+        "JavaScript": 754,
+        "HTML": 498
+      },
+      "tech_stack": [
+        "TypeScript",
+        "CSS",
+        "JavaScript",
+        "HTML",
+        "React",
+        "Node.js"
+      ],
+      "topics": [],
+      "created_at": "2026-01-13T09:34:40Z",
+      "updated_at": "2026-01-16T10:06:25Z",
+      "pushed_at": "2026-01-16T06:04:45Z",
+      "ai_summary": {
+        "summary": "OpenSource Claude Cowork. A desktop AI assistant that helps you with programming, file management, and any task you can describe.",
+        "highlights": [
+          "1,398 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_version-0.0.2-blue.svg",
+            "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\claude-cowork\\1_version-0.0.2-blue.svg",
+            "size": 1095,
+            "content_type": "image/svg+xml;charset=utf-8",
+            "downloaded_at": "2026-01-16T10:11:09.829Z",
+            "original_url": "https://img.shields.io/badge/version-0.0.2-blue.svg",
+            "absolute_url": "https://img.shields.io/badge/version-0.0.2-blue.svg"
+          }
+        ],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\claude-cowork",
+        "representative_image": {
+          "filename": "1_version-0.0.2-blue.svg",
+          "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\claude-cowork\\1_version-0.0.2-blue.svg",
+          "size": 1095,
+          "content_type": "image/svg+xml;charset=utf-8",
+          "downloaded_at": "2026-01-16T10:11:09.829Z",
+          "original_url": "https://img.shields.io/badge/version-0.0.2-blue.svg",
+          "absolute_url": "https://img.shields.io/badge/version-0.0.2-blue.svg"
+        }
+      },
+      "activity_score": 66,
+      "popularity_score": 66,
+      "freshness_score": 100,
+      "overall_score": 73,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 6,
+      "name": "Engram",
+      "full_name": "deepseek-ai/Engram",
+      "owner": "deepseek-ai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/148330874?v=4",
+      "stars": 2574,
+      "forks": 140,
+      "issues": 7,
+      "watchers": 2574,
+      "description": "Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models",
+      "homepage": "",
+      "clone_url": "https://github.com/deepseek-ai/Engram.git",
+      "ssh_url": "git@github.com:deepseek-ai/Engram.git",
+      "html_url": "https://github.com/deepseek-ai/Engram",
+      "language": "Python",
+      "primary_language": "Python",
+      "languages": {
+        "Python": 15017
+      },
+      "tech_stack": [
+        "Python"
+      ],
+      "topics": [],
+      "created_at": "2026-01-12T05:26:50Z",
+      "updated_at": "2026-01-16T10:03:13Z",
+      "pushed_at": "2026-01-14T01:13:02Z",
+      "ai_summary": {
+        "summary": "Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models",
+        "highlights": [
+          "2,574 stars",
+          "Python"
+        ],
+        "tech_summary": "Python",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\engram",
+        "representative_image": null
+      },
+      "activity_score": 55,
+      "popularity_score": 69,
+      "freshness_score": 100,
+      "overall_score": 71,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 7,
+      "name": "ralph-tui",
+      "full_name": "subsy/ralph-tui",
+      "owner": "subsy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7700461?v=4",
+      "stars": 816,
+      "forks": 83,
+      "issues": 17,
+      "watchers": 816,
+      "description": "",
+      "homepage": "https://ralph-tui.com",
+      "clone_url": "https://github.com/subsy/ralph-tui.git",
+      "ssh_url": "git@github.com:subsy/ralph-tui.git",
+      "html_url": "https://github.com/subsy/ralph-tui",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 1536901,
+        "MDX": 146207,
+        "CSS": 7394,
+        "Handlebars": 4821,
+        "JavaScript": 4108
+      },
+      "tech_stack": [
+        "TypeScript",
+        "MDX",
+        "CSS",
+        "Handlebars",
+        "JavaScript",
+        "React"
+      ],
+      "topics": [],
+      "created_at": "2026-01-11T10:29:12Z",
+      "updated_at": "2026-01-16T10:09:50Z",
+      "pushed_at": "2026-01-16T10:08:48Z",
+      "ai_summary": {
+        "summary": "暂无项目描述",
+        "highlights": [
+          "816 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_ralph-tui.svg",
+            "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\ralph-tui\\1_ralph-tui.svg",
+            "size": 1083,
+            "content_type": "image/svg+xml;charset=utf-8",
+            "downloaded_at": "2026-01-16T10:11:34.283Z",
+            "original_url": "https://img.shields.io/npm/v/ralph-tui.svg",
+            "absolute_url": "https://img.shields.io/npm/v/ralph-tui.svg"
+          }
+        ],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\ralph-tui",
+        "representative_image": {
+          "filename": "1_ralph-tui.svg",
+          "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\ralph-tui\\1_ralph-tui.svg",
+          "size": 1083,
+          "content_type": "image/svg+xml;charset=utf-8",
+          "downloaded_at": "2026-01-16T10:11:34.283Z",
+          "original_url": "https://img.shields.io/npm/v/ralph-tui.svg",
+          "absolute_url": "https://img.shields.io/npm/v/ralph-tui.svg"
+        }
+      },
+      "activity_score": 62,
+      "popularity_score": 60,
+      "freshness_score": 100,
+      "overall_score": 69,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 8,
+      "name": "nanocode",
+      "full_name": "1rgs/nanocode",
+      "owner": "1rgs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20087438?v=4",
+      "stars": 1296,
+      "forks": 107,
+      "issues": 5,
+      "watchers": 1296,
+      "description": "Minimal Claude Code alternative. Single Python file, zero dependencies, ~250 lines.",
+      "homepage": null,
+      "clone_url": "https://github.com/1rgs/nanocode.git",
+      "ssh_url": "git@github.com:1rgs/nanocode.git",
+      "html_url": "https://github.com/1rgs/nanocode",
+      "language": "Python",
+      "primary_language": "Python",
+      "languages": {
+        "Python": 8445
+      },
+      "tech_stack": [
+        "Python"
+      ],
+      "topics": [],
+      "created_at": "2026-01-11T02:12:27Z",
+      "updated_at": "2026-01-16T10:10:00Z",
+      "pushed_at": "2026-01-14T05:59:51Z",
+      "ai_summary": {
+        "summary": "Minimal Claude Code alternative. Single Python file, zero dependencies, ~250 lines.",
+        "highlights": [
+          "1,296 stars",
+          "Python"
+        ],
+        "tech_summary": "Python",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\nanocode",
+        "representative_image": null
+      },
+      "activity_score": 53,
+      "popularity_score": 64,
+      "freshness_score": 100,
+      "overall_score": 68,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 9,
+      "name": "skills",
+      "full_name": "trailofbits/skills",
+      "owner": "trailofbits",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2314423?v=4",
+      "stars": 1000,
+      "forks": 70,
+      "issues": 2,
+      "watchers": 1000,
+      "description": "Trail of Bits Claude Code skills for security research, vulnerability detection, and audit workflows",
+      "homepage": null,
+      "clone_url": "https://github.com/trailofbits/skills.git",
+      "ssh_url": "git@github.com:trailofbits/skills.git",
+      "html_url": "https://github.com/trailofbits/skills",
+      "language": "Python",
+      "primary_language": "Python",
+      "languages": {
+        "Python": 298301,
+        "CodeQL": 12064,
+        "C": 8714,
+        "Swift": 5459,
+        "C#": 5442,
+        "Ruby": 5419,
+        "Java": 5221,
+        "JavaScript": 5033,
+        "Kotlin": 5019,
+        "TypeScript": 4645,
+        "PHP": 3832,
+        "Rust": 2608,
+        "Shell": 2304,
+        "Go": 2213
+      },
+      "tech_stack": [
+        "Python",
+        "CodeQL",
+        "C",
+        "Swift",
+        "C#",
+        "Ruby",
+        "Java",
+        "JavaScript"
+      ],
+      "topics": [],
+      "created_at": "2026-01-14T18:23:21Z",
+      "updated_at": "2026-01-16T09:50:27Z",
+      "pushed_at": "2026-01-15T15:50:21Z",
+      "ai_summary": {
+        "summary": "Trail of Bits Claude Code skills for security research, vulnerability detection, and audit workflows",
+        "highlights": [
+          "1,000 stars",
+          "Python"
+        ],
+        "tech_summary": "Python",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\skills",
+        "representative_image": null
+      },
+      "activity_score": 53,
+      "popularity_score": 61,
+      "freshness_score": 100,
+      "overall_score": 66,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 10,
+      "name": "better-shot",
+      "full_name": "KartikLabhshetwar/better-shot",
+      "owner": "KartikLabhshetwar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/141413343?v=4",
+      "stars": 822,
+      "forks": 47,
+      "issues": 9,
+      "watchers": 822,
+      "description": "An open-source alternative to CleanShot X for macOS. Capture, edit, and enhance your screenshots with professional quality.",
+      "homepage": "https://bettershot.site",
+      "clone_url": "https://github.com/KartikLabhshetwar/better-shot.git",
+      "ssh_url": "git@github.com:KartikLabhshetwar/better-shot.git",
+      "html_url": "https://github.com/KartikLabhshetwar/better-shot",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 579316,
+        "Rust": 30458,
+        "CSS": 19735,
+        "Shell": 975,
+        "JavaScript": 384,
+        "HTML": 375
+      },
+      "tech_stack": [
+        "TypeScript",
+        "Rust",
+        "CSS",
+        "Shell",
+        "JavaScript",
+        "HTML",
+        "desktop-application",
+        "macos-app"
+      ],
+      "topics": [
+        "desktop-application",
+        "macos-app",
+        "macos-application",
+        "tauri",
+        "vitejs"
+      ],
+      "created_at": "2026-01-11T09:39:37Z",
+      "updated_at": "2026-01-16T09:46:26Z",
+      "pushed_at": "2026-01-16T07:27:46Z",
+      "ai_summary": {
+        "summary": "An open-source alternative to CleanShot X for macOS. Capture, edit, and enhance your screenshots with professional quality.",
+        "highlights": [
+          "822 stars",
+          "TypeScript"
+        ],
+        "tech_summary": "TypeScript",
+        "use_case": "开发工具",
+        "source": "fallback"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_discord-%235865f2.svg",
+            "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\better-shot\\1_discord-%235865f2.svg",
+            "size": 2396,
+            "content_type": "image/svg+xml;charset=utf-8",
+            "downloaded_at": "2026-01-16T10:11:32.873Z",
+            "original_url": "https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white",
+            "absolute_url": "https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"
+          }
+        ],
+        "image_dir": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\better-shot",
+        "representative_image": {
+          "filename": "1_discord-%235865f2.svg",
+          "filepath": "C:\\Users\\xmls\\Documents\\trae_projects\\GitHub-Trending-\\images\\2026\\week-3\\better-shot\\1_discord-%235865f2.svg",
+          "size": 2396,
+          "content_type": "image/svg+xml;charset=utf-8",
+          "downloaded_at": "2026-01-16T10:11:32.873Z",
+          "original_url": "https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white",
+          "absolute_url": "https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"
+        }
+      },
+      "activity_score": 56,
+      "popularity_score": 59,
+      "freshness_score": 100,
+      "overall_score": 66,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    }
+  ],
+  "statistics": {
+    "total_stars": 23593,
+    "total_forks": 3237,
+    "average_stars": 2359,
+    "average_forks": 324,
+    "top_languages": [
+      {
+        "name": "TypeScript",
+        "count": 5
+      },
+      {
+        "name": "Python",
+        "count": 4
+      },
+      {
+        "name": "C",
+        "count": 1
+      }
+    ],
+    "top_topics": [
+      {
+        "name": "agent",
+        "count": 1
+      },
+      {
+        "name": "ai",
+        "count": 1
+      },
+      {
+        "name": "aigc",
+        "count": 1
+      },
+      {
+        "name": "gemini",
+        "count": 1
+      },
+      {
+        "name": "llm",
+        "count": 1
+      },
+      {
+        "name": "quant",
+        "count": 1
+      },
+      {
+        "name": "quantitative-trading",
+        "count": 1
+      },
+      {
+        "name": "rag",
+        "count": 1
+      },
+      {
+        "name": "stock",
+        "count": 1
+      },
+      {
+        "name": "desktop-application",
+        "count": 1
+      }
+    ],
+    "score_distribution": {
+      "min": 66,
+      "max": 83,
+      "average": 73,
+      "median": 72
+    }
+  },
+  "generated_at": "2026-01-16T10:11:34.286Z"
+}

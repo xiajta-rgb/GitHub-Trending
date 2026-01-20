@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "report_title": "GitHub趋势排行榜 - 2026年第4周",
+    "year": 2026,
+    "week": 4,
+    "week_range": {
+      "start": "2026-01-18",
+      "end": "2026-01-24"
+    },
+    "total_repositories": 10,
+    "generation_date": "2026-01-20 12:44:32",
+    "next_update": "2026-01-27"
+  },
+  "repositories": [
+    {
+      "full_name": "vercel-labs/json-render",
+      "rank": 1,
+      "stars": 7304,
+      "forks": 345,
+      "overall_score": 79
+    },
+    {
+      "full_name": "different-ai/openwork",
+      "rank": 2,
+      "stars": 3477,
+      "forks": 249,
+      "overall_score": 78
+    },
+    {
+      "full_name": "21st-dev/1code",
+      "rank": 3,
+      "stars": 3342,
+      "forks": 286,
+      "overall_score": 78
+    },
+    {
+      "full_name": "accomplish-ai/openwork",
+      "rank": 4,
+      "stars": 1983,
+      "forks": 297,
+      "overall_score": 78
+    },
+    {
+      "full_name": "affaan-m/everything-claude-code",
+      "rank": 5,
+      "stars": 3631,
+      "forks": 484,
+      "overall_score": 75
+    },
+    {
+      "full_name": "vudovn/antigravity-kit",
+      "rank": 6,
+      "stars": 1503,
+      "forks": 295,
+      "overall_score": 71
+    },
+    {
+      "full_name": "vercel-labs/add-skill",
+      "rank": 7,
+      "stars": 1423,
+      "forks": 76,
+      "overall_score": 71
+    },
+    {
+      "full_name": "trailofbits/skills",
+      "rank": 8,
+      "stars": 1466,
+      "forks": 113,
+      "overall_score": 69
+    },
+    {
+      "full_name": "blader/humanizer",
+      "rank": 9,
+      "stars": 1288,
+      "forks": 93,
+      "overall_score": 69
+    },
+    {
+      "full_name": "blader/Claudeception",
+      "rank": 10,
+      "stars": 914,
+      "forks": 81,
+      "overall_score": 67
+    }
+  ],
+  "generated_at": "2026-01-20T04:44:32.676Z"
+}

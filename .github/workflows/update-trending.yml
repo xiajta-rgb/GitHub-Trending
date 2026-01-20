@@ -1,0 +1,263 @@
+name: Update GitHub Trending
+
+# 工作流触发条件
+on:
+  # 定时触发：每周一凌晨2点（UTC时间）执行
+  schedule:
+    - cron: '0 2 * * 1'  # 每周一 02:00 UTC
+  
+  # 手动触发
+  workflow_dispatch:
+    inputs:
+      repo_limit:
+        description: '项目数量限制'
+        required: false
+        default: '10'
+        type: string
+      language:
+        description: '编程语言过滤（留空=所有语言）'
+        required: false
+        default: ''
+        type: string
+      since:
+        description: '时间范围'
+        required: false
+        default: 'weekly'
+        type: choice
+        options:
+          - daily
+          - weekly
+          - monthly
+
+# 环境变量
+env:
+  NODE_VERSION: '20'
+  TIMEZONE: 'Asia/Shanghai'
+
+jobs:
+  update-trending:
+    runs-on: ubuntu-latest
+    
+    # 设置权限
+    permissions:
+      contents: write
+      actions: read
+      
+    # 设置超时时间（30分钟）
+    timeout-minutes: 30
+    
+    steps:
+      # 1. 检出代码
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # 需要完整历史记录以便提交更改
+          fetch-depth: 0
+          # 使用GitHub Token进行认证
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 2. 设置Node.js环境
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          # 移除缓存配置，直接安装依赖
+
+      # 3. 安装依赖
+      - name: 📦 Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      # 4. 设置时区
+      - name: 🌏 Set timezone
+        run: |
+          sudo timedatectl set-timezone ${{ env.TIMEZONE }}
+          echo "当前时间: $(date)"
+
+      # 5. 检查配置
+      - name: ⚙️ Check configuration
+        run: |
+          echo "🔍 检查环境变量..."
+          echo "GITHUB_TOKEN: ${GITHUB_TOKEN:0:10}..."
+          echo "SILICONFLOW_API_KEY: ${SILICONFLOW_API_KEY:0:10}..."
+          echo "AI_BASE_URL: $AI_BASE_URL"
+          echo "AI_MODEL: $AI_MODEL"
+          echo ""
+          node scripts/update-trending.js --check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          AI_BASE_URL: ${{ secrets.AI_BASE_URL || 'https://api.siliconflow.cn/v1' }}
+          AI_MODEL: ${{ secrets.AI_MODEL || 'Pro/moonshotai/Kimi-K2-Instruct' }}
+
+      # 6. 执行趋势更新
+      - name: 🚀 Update trending repositories
+        run: |
+          # 构建命令参数
+          COMMAND="node scripts/update-trending.js"
+          
+          # 添加手动触发的参数
+          if [ "${REPO_LIMIT}" != "" ]; then
+            COMMAND="$COMMAND --limit $REPO_LIMIT"
+          fi
+          
+          if [ "${LANGUAGE}" != "" ]; then
+            COMMAND="$COMMAND --language $LANGUAGE"
+          fi
+          
+          if [ "${SINCE}" != "" ]; then
+            COMMAND="$COMMAND --since $SINCE"
+          fi
+          
+          echo "执行命令: $COMMAND"
+          $COMMAND
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          AI_BASE_URL: ${{ secrets.AI_BASE_URL || 'https://api.siliconflow.cn/v1' }}
+          AI_MODEL: ${{ secrets.AI_MODEL || 'Pro/moonshotai/Kimi-K2-Instruct' }}
+          REPO_LIMIT: ${{ github.event.inputs.repo_limit || '' }}
+          LANGUAGE: ${{ github.event.inputs.language || '' }}
+          SINCE: ${{ github.event.inputs.since || '' }}
+
+      # 7. 检查是否有变更
+      - name: 📋 Check for changes
+        id: changes
+        run: |
+          git add .
+          if git diff --staged --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "📝 没有检测到变更"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "📝 检测到以下变更:"
+            git diff --staged --name-only
+          fi
+
+      # 8. 提交变更
+      - name: 💾 Commit changes
+        if: steps.changes.outputs.changes == 'true'
+        run: |
+          # 配置Git用户信息
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # 获取当前周信息
+          WEEK_INFO=$(node -e "
+            const moment = require('moment');
+            const now = moment();
+            console.log(\`\${now.year()}年第\${now.week()}周\`);
+          ")
+          
+          # 生成提交信息
+          COMMIT_MSG="📊 更新GitHub趋势排行榜 - $WEEK_INFO
+
+          🤖 由GitHub Actions自动生成
+          📅 更新时间: $(date '+%Y-%m-%d %H:%M:%S %Z')
+          📊 数据来源: GitHub API + AI智能总结
+          
+          Co-authored-by: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          
+          # 提交变更
+          git commit -m "$COMMIT_MSG"
+          
+          echo "✅ 变更已提交"
+
+      # 9. 推送到远程仓库
+      - name: 🚀 Push changes
+        if: steps.changes.outputs.changes == 'true'
+        run: |
+          git push origin main
+          echo "✅ 变更已推送到远程仓库"
+
+      # 10. 清理过期数据（每月第一周执行）
+      - name: 🧹 Cleanup old data
+        if: steps.changes.outputs.changes == 'true'
+        run: |
+          # 检查是否是月初第一周
+          WEEK_OF_MONTH=$(node -e "
+            const moment = require('moment');
+            const weekOfMonth = Math.ceil(moment().date() / 7);
+            console.log(weekOfMonth);
+          ")
+          
+          if [ "$WEEK_OF_MONTH" = "1" ]; then
+            echo "🗓️ 月初第一周，执行数据清理..."
+            node scripts/update-trending.js --cleanup
+            
+            # 如果有清理变更，也提交
+            git add .
+            if ! git diff --staged --quiet; then
+              git commit -m "🧹 清理过期数据
+
+              🤖 由GitHub Actions自动执行
+              📅 清理时间: $(date '+%Y-%m-%d %H:%M:%S %Z')"
+              git push origin main
+              echo "✅ 数据清理完成并已提交"
+            fi
+          else
+            echo "⏭️ 非月初第一周，跳过数据清理"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          AI_BASE_URL: ${{ secrets.AI_BASE_URL || 'https://api.siliconflow.cn/v1' }}
+          AI_MODEL: ${{ secrets.AI_MODEL || 'Pro/moonshotai/Kimi-K2-Instruct' }}
+
+      # 11. 生成报告摘要
+      - name: 📊 Generate summary
+        if: steps.changes.outputs.changes == 'true'
+        run: |
+          echo "## 📈 GitHub趋势排行榜更新完成" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📅 更新信息" >> $GITHUB_STEP_SUMMARY
+          echo "- **更新时间**: $(date '+%Y-%m-%d %H:%M:%S %Z')" >> $GITHUB_STEP_SUMMARY
+          echo "- **触发方式**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **工作流**: ${{ github.workflow }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          # 显示参数（如果是手动触发）
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "### ⚙️ 执行参数" >> $GITHUB_STEP_SUMMARY
+            echo "- **项目数量**: ${{ github.event.inputs.repo_limit || '10' }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **编程语言**: ${{ github.event.inputs.language || '全部' }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **时间范围**: ${{ github.event.inputs.since || 'weekly' }}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "### 🔗 查看结果" >> $GITHUB_STEP_SUMMARY
+          echo "- [📖 查看README](../README.md)" >> $GITHUB_STEP_SUMMARY
+          echo "- [📂 历史数据](../archives/)" >> $GITHUB_STEP_SUMMARY
+          echo "- [🖼️ 项目图片](../images/)" >> $GITHUB_STEP_SUMMARY
+
+  # 错误处理和通知作业
+  notify-on-failure:
+    runs-on: ubuntu-latest
+    needs: update-trending
+    if: failure()
+    
+    steps:
+      - name: 📧 Send failure notification
+        run: |
+          echo "❌ GitHub趋势排行榜更新失败"
+          echo "时间: $(date '+%Y-%m-%d %H:%M:%S %Z')"
+          echo "工作流: ${{ github.workflow }}"
+          echo "运行ID: ${{ github.run_id }}"
+          echo ""
+          echo "请查看工作流日志了解详细错误信息："
+          echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      # 可以在这里添加其他通知方式，如邮件、Slack等
+      # - name: 📧 Send email notification
+      #   uses: dawidd6/action-send-mail@v3
+      #   with:
+      #     server_address: smtp.gmail.com
+      #     server_port: 587
+      #     username: ${{ secrets.EMAIL_USERNAME }}
+      #     password: ${{ secrets.EMAIL_PASSWORD }}
+      #     subject: GitHub趋势排行榜更新失败
+      #     body: 工作流执行失败，请查看详细日志。

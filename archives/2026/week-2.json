@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "report_title": "GitHub趋势排行榜 - 2026年第2周",
+    "year": 2026,
+    "week": 2,
+    "week_range": {
+      "start": "2026-01-04",
+      "end": "2026-01-10"
+    },
+    "total_repositories": 10,
+    "generation_date": "2026-01-10 23:59:59",
+    "next_update": "2026-01-17"
+  },
+  "repositories": [
+    {
+      "full_name": "IQuestLab/IQuest-Coder-V1",
+      "rank": 1,
+      "stars": 1004,
+      "forks": 61,
+      "overall_score": 68
+    },
+    {
+      "full_name": "CloudAI-X/claude-workflow-v2",
+      "rank": 2,
+      "stars": 952,
+      "forks": 151,
+      "overall_score": 68
+    },
+    {
+      "full_name": "jarrodwatts/claude-hud",
+      "rank": 3,
+      "stars": 618,
+      "forks": 36,
+      "overall_score": 66
+    },
+    {
+      "full_name": "VoidmatrixHeathcliff/VoidNovelEngine",
+      "rank": 4,
+      "stars": 600,
+      "forks": 59,
+      "overall_score": 65
+    },
+    {
+      "full_name": "tukuaiai/tradecat",
+      "rank": 5,
+      "stars": 472,
+      "forks": 144,
+      "overall_score": 65
+    },
+    {
+      "full_name": "OthmanAdi/planning-with-files",
+      "rank": 6,
+      "stars": 504,
+      "forks": 74,
+      "overall_score": 63
+    },
+    {
+      "full_name": "alexknowshtml/smaug",
+      "rank": 7,
+      "stars": 484,
+      "forks": 50,
+      "overall_score": 63
+    },
+    {
+      "full_name": "numman-ali/cc-mirror",
+      "rank": 8,
+      "stars": 473,
+      "forks": 33,
+      "overall_score": 63
+    },
+    {
+      "full_name": "Lulzx/zpdf",
+      "rank": 9,
+      "stars": 729,
+      "forks": 22,
+      "overall_score": 62
+    },
+    {
+      "full_name": "Dimillian/Skills",
+      "rank": 10,
+      "stars": 502,
+      "forks": 24,
+      "overall_score": 62
+    }
+  ],
+  "generated_at": "2026-01-05T04:01:58.334Z"
+}

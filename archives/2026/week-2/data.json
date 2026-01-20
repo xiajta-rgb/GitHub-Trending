@@ -1,0 +1,845 @@
+{
+  "metadata": {
+    "report_title": "GitHub趋势排行榜 - 2026年第2周",
+    "year": 2026,
+    "week": 2,
+    "week_range": {
+      "start": "2026-01-04",
+      "end": "2026-01-10"
+    },
+    "total_repositories": 10,
+    "generation_date": "2026-01-10 23:59:59",
+    "next_update": "2026-01-17"
+  },
+  "repositories": [
+    {
+      "rank": 1,
+      "name": "IQuest-Coder-V1",
+      "full_name": "IQuestLab/IQuest-Coder-V1",
+      "owner": "IQuestLab",
+      "avatar_url": "https://avatars.githubusercontent.com/u/248444512?v=4",
+      "stars": 1004,
+      "forks": 61,
+      "issues": 13,
+      "watchers": 1004,
+      "description": "",
+      "homepage": null,
+      "clone_url": "https://github.com/IQuestLab/IQuest-Coder-V1.git",
+      "ssh_url": "git@github.com:IQuestLab/IQuest-Coder-V1.git",
+      "html_url": "https://github.com/IQuestLab/IQuest-Coder-V1",
+      "language": "Python",
+      "primary_language": "Python",
+      "languages": {
+        "Python": 706343,
+        "Shell": 47957
+      },
+      "tech_stack": [
+        "Python",
+        "Shell",
+        "AWS"
+      ],
+      "topics": [],
+      "created_at": "2025-12-31T06:42:57Z",
+      "updated_at": "2026-01-05T03:58:54Z",
+      "pushed_at": "2026-01-03T17:47:18Z",
+      "ai_summary": {
+        "summary": "IQuest-Coder-V1是一套开源的400亿参数代码大模型家族，提供Base、Instruct及Loop-Instruct多版本，助力开发者高效生成与优化代码。",
+        "highlights": [
+          "400亿参数规模，性能强劲",
+          "多阶段训练版本，灵活适配需求",
+          "配套技术报告与博客，文档完整"
+        ],
+        "tech_summary": "Python+Shell+AWS训练与部署",
+        "use_case": "自动补全、代码生成、智能编程助手",
+        "source": "ai"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_iquest-coder-v1-logo.png",
+            "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/iquest-coder-v1/1_iquest-coder-v1-logo.png",
+            "size": 122764,
+            "content_type": "image/png",
+            "downloaded_at": "2026-01-05T04:01:48.493Z",
+            "original_url": "./papers/iquest-coder-v1-logo.png",
+            "absolute_url": "https://raw.githubusercontent.com/IQuestLab/IQuest-Coder-V1/main/papers/iquest-coder-v1-logo.png"
+          }
+        ],
+        "image_dir": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/iquest-coder-v1",
+        "representative_image": {
+          "filename": "1_iquest-coder-v1-logo.png",
+          "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/iquest-coder-v1/1_iquest-coder-v1-logo.png",
+          "size": 122764,
+          "content_type": "image/png",
+          "downloaded_at": "2026-01-05T04:01:48.493Z",
+          "original_url": "./papers/iquest-coder-v1-logo.png",
+          "absolute_url": "https://raw.githubusercontent.com/IQuestLab/IQuest-Coder-V1/main/papers/iquest-coder-v1-logo.png"
+        }
+      },
+      "activity_score": 58,
+      "popularity_score": 61,
+      "freshness_score": 100,
+      "overall_score": 68,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 2,
+      "name": "claude-workflow-v2",
+      "full_name": "CloudAI-X/claude-workflow-v2",
+      "owner": "CloudAI-X",
+      "avatar_url": "https://avatars.githubusercontent.com/u/252792870?v=4",
+      "stars": 952,
+      "forks": 151,
+      "issues": 3,
+      "watchers": 952,
+      "description": "Universal Claude Code workflow plugin with agents, skills, hooks, and commands",
+      "homepage": null,
+      "clone_url": "https://github.com/CloudAI-X/claude-workflow-v2.git",
+      "ssh_url": "git@github.com:CloudAI-X/claude-workflow-v2.git",
+      "html_url": "https://github.com/CloudAI-X/claude-workflow-v2",
+      "language": "Python",
+      "primary_language": "Python",
+      "languages": {
+        "Python": 16993,
+        "Shell": 3568
+      },
+      "tech_stack": [
+        "Python",
+        "Shell",
+        "Node.js",
+        "TypeScript",
+        "GraphQL"
+      ],
+      "topics": [],
+      "created_at": "2026-01-01T02:20:41Z",
+      "updated_at": "2026-01-05T03:59:03Z",
+      "pushed_at": "2026-01-04T19:56:00Z",
+      "ai_summary": {
+        "summary": "为Claude Code提供通用工作流插件，集成多智能体、技能、钩子与命令，一键赋能任意软件项目。",
+        "highlights": [
+          "多智能体协同，开箱即用",
+          "支持CLI与SDK双模式接入",
+          "可插拔技能与钩子，灵活扩展"
+        ],
+        "tech_summary": "Python+TypeScript多语言插件框架",
+        "use_case": "快速给项目注入AI自动化工作流",
+        "source": "ai"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_license-mit-yellow.svg",
+            "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/claude-workflow-v2/1_license-mit-yellow.svg",
+            "size": 1087,
+            "content_type": "image/svg+xml;charset=utf-8",
+            "downloaded_at": "2026-01-05T04:01:49.740Z",
+            "original_url": "https://img.shields.io/badge/License-MIT-yellow.svg",
+            "absolute_url": "https://img.shields.io/badge/License-MIT-yellow.svg"
+          }
+        ],
+        "image_dir": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/claude-workflow-v2",
+        "representative_image": {
+          "filename": "1_license-mit-yellow.svg",
+          "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/claude-workflow-v2/1_license-mit-yellow.svg",
+          "size": 1087,
+          "content_type": "image/svg+xml;charset=utf-8",
+          "downloaded_at": "2026-01-05T04:01:49.740Z",
+          "original_url": "https://img.shields.io/badge/License-MIT-yellow.svg",
+          "absolute_url": "https://img.shields.io/badge/License-MIT-yellow.svg"
+        }
+      },
+      "activity_score": 55,
+      "popularity_score": 63,
+      "freshness_score": 100,
+      "overall_score": 68,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 3,
+      "name": "claude-hud",
+      "full_name": "jarrodwatts/claude-hud",
+      "owner": "jarrodwatts",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35651410?v=4",
+      "stars": 618,
+      "forks": 36,
+      "issues": 14,
+      "watchers": 618,
+      "description": "A Claude Code plugin that shows what's happening - context usage, active tools, running agents, and todo progress",
+      "homepage": null,
+      "clone_url": "https://github.com/jarrodwatts/claude-hud.git",
+      "ssh_url": "git@github.com:jarrodwatts/claude-hud.git",
+      "html_url": "https://github.com/jarrodwatts/claude-hud",
+      "language": "JavaScript",
+      "primary_language": "JavaScript",
+      "languages": {
+        "JavaScript": 31045,
+        "TypeScript": 21119
+      },
+      "tech_stack": [
+        "JavaScript",
+        "TypeScript",
+        "anthropic",
+        "claude",
+        "claude-code",
+        "cli",
+        "plugin",
+        "statusline"
+      ],
+      "topics": [
+        "anthropic",
+        "claude",
+        "claude-code",
+        "cli",
+        "plugin",
+        "statusline",
+        "typescript"
+      ],
+      "created_at": "2026-01-02T01:35:07Z",
+      "updated_at": "2026-01-05T03:58:49Z",
+      "pushed_at": "2026-01-05T03:52:34Z",
+      "ai_summary": {
+        "summary": "为Claude Code提供实时状态栏，直观展示上下文用量、活跃工具、运行代理与待办进度，提升开发透明度与效率。",
+        "highlights": [
+          "实时HUD常驻输入区下方",
+          "一键安装零配置即生效",
+          "可视化资源与任务进度"
+        ],
+        "tech_summary": "TypeScript + Claude Code插件API",
+        "use_case": "需持续监控AI助手状态与资源消耗的开发者场景",
+        "source": "ai"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_claude-hud-preview-5-2.png",
+            "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/claude-hud/1_claude-hud-preview-5-2.png",
+            "size": 121477,
+            "content_type": "image/png",
+            "downloaded_at": "2026-01-05T04:01:51.800Z",
+            "original_url": "claude-hud-preview-5-2.png",
+            "absolute_url": "https://raw.githubusercontent.com/jarrodwatts/claude-hud/main/claude-hud-preview-5-2.png"
+          }
+        ],
+        "image_dir": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/claude-hud",
+        "representative_image": {
+          "filename": "1_claude-hud-preview-5-2.png",
+          "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/claude-hud/1_claude-hud-preview-5-2.png",
+          "size": 121477,
+          "content_type": "image/png",
+          "downloaded_at": "2026-01-05T04:01:51.800Z",
+          "original_url": "claude-hud-preview-5-2.png",
+          "absolute_url": "https://raw.githubusercontent.com/jarrodwatts/claude-hud/main/claude-hud-preview-5-2.png"
+        }
+      },
+      "activity_score": 59,
+      "popularity_score": 56,
+      "freshness_score": 100,
+      "overall_score": 66,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 4,
+      "name": "VoidNovelEngine",
+      "full_name": "VoidmatrixHeathcliff/VoidNovelEngine",
+      "owner": "VoidmatrixHeathcliff",
+      "avatar_url": "https://avatars.githubusercontent.com/u/46210663?v=4",
+      "stars": 600,
+      "forks": 59,
+      "issues": 6,
+      "watchers": 600,
+      "description": "A free, modern engine for visual novels | 自由，现代化的视觉小说引擎",
+      "homepage": null,
+      "clone_url": "https://github.com/VoidmatrixHeathcliff/VoidNovelEngine.git",
+      "ssh_url": "git@github.com:VoidmatrixHeathcliff/VoidNovelEngine.git",
+      "html_url": "https://github.com/VoidmatrixHeathcliff/VoidNovelEngine",
+      "language": null,
+      "primary_language": "Unknown",
+      "languages": {},
+      "tech_stack": [],
+      "topics": [],
+      "created_at": "2025-12-31T03:19:29Z",
+      "updated_at": "2026-01-05T03:58:20Z",
+      "pushed_at": "2026-01-03T18:26:59Z",
+      "ai_summary": {
+        "summary": "跨平台、开源的视觉小说引擎，零授权费、现代化工作流，让独立开发者快速发布高质量文字冒险游戏。",
+        "highlights": [
+          "完全免费开源，无版权限制",
+          "现代化UI与脚本，开发门槛低",
+          "跨Windows/macOS/Linux发布"
+        ],
+        "tech_summary": "C++/SDL或Web技术栈",
+        "use_case": "独立文字冒险、Galgame、互动叙事作品开发",
+        "source": "ai"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_snapshot_1.png",
+            "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/voidnovelengine/1_snapshot_1.png",
+            "size": 1072552,
+            "content_type": "image/png",
+            "downloaded_at": "2026-01-05T04:01:53.066Z",
+            "original_url": "doc/img/snapshots/snapshot_1.png",
+            "absolute_url": "https://raw.githubusercontent.com/VoidmatrixHeathcliff/VoidNovelEngine/main/doc/img/snapshots/snapshot_1.png"
+          }
+        ],
+        "image_dir": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/voidnovelengine",
+        "representative_image": {
+          "filename": "1_snapshot_1.png",
+          "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/voidnovelengine/1_snapshot_1.png",
+          "size": 1072552,
+          "content_type": "image/png",
+          "downloaded_at": "2026-01-05T04:01:53.066Z",
+          "original_url": "doc/img/snapshots/snapshot_1.png",
+          "absolute_url": "https://raw.githubusercontent.com/VoidmatrixHeathcliff/VoidNovelEngine/main/doc/img/snapshots/snapshot_1.png"
+        }
+      },
+      "activity_score": 54,
+      "popularity_score": 57,
+      "freshness_score": 100,
+      "overall_score": 65,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 5,
+      "name": "tradecat",
+      "full_name": "tukuaiai/tradecat",
+      "owner": "tukuaiai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/244259119?v=4",
+      "stars": 472,
+      "forks": 144,
+      "issues": 0,
+      "watchers": 472,
+      "description": "交易猫；tradecat；全市场量化交易数据平台",
+      "homepage": "https://x.com/tradecat_ai",
+      "clone_url": "https://github.com/tukuaiai/tradecat.git",
+      "ssh_url": "git@github.com:tukuaiai/tradecat.git",
+      "html_url": "https://github.com/tukuaiai/tradecat",
+      "language": "Python",
+      "primary_language": "Python",
+      "languages": {
+        "Python": 1668234,
+        "JavaScript": 1069386,
+        "Shell": 132857,
+        "PLpgSQL": 42989,
+        "Makefile": 1681
+      },
+      "tech_stack": [
+        "Python",
+        "JavaScript",
+        "Shell",
+        "PLpgSQL",
+        "Makefile",
+        "ai",
+        "binance",
+        "bitcoin"
+      ],
+      "topics": [
+        "ai",
+        "binance",
+        "bitcoin",
+        "ccxt",
+        "crypto",
+        "cryptocurrency",
+        "ethereum",
+        "futures",
+        "indicators",
+        "market-data",
+        "pandas",
+        "python",
+        "quantitative-trading",
+        "real-time",
+        "ta-lib",
+        "technical-analysis",
+        "telegram-bot",
+        "timescaledb",
+        "trading",
+        "wyckoff"
+      ],
+      "created_at": "2025-12-30T03:32:38Z",
+      "updated_at": "2026-01-05T03:16:20Z",
+      "pushed_at": "2026-01-04T12:32:28Z",
+      "ai_summary": {
+        "summary": "交易猫是覆盖全市场的轻量级量化数据平台，聚合币安、比特币等行情，提供实时/历史K线、指标计算、交易信号与Telegram告警，一键部署即可监控与回测。",
+        "highlights": [
+          "全市场数据一站式获取",
+          "内置150+技术指标与Wyckoff分析",
+          "支持实时告警与策略回测，代码开源可扩展"
+        ],
+        "tech_summary": "Python+CCXT+TimescaleDB+TA-Lib",
+        "use_case": "数字货币量化研究、策略回测与实时交易监控",
+        "source": "ai"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_badge.svg",
+            "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/tradecat/1_badge.svg",
+            "size": 2262,
+            "content_type": "image/svg+xml; charset=utf-8",
+            "downloaded_at": "2026-01-05T04:01:57.285Z",
+            "original_url": "https://github.com/tukuaiai/tradecat/actions/workflows/ci.yml/badge.svg",
+            "absolute_url": "https://github.com/tukuaiai/tradecat/actions/workflows/ci.yml/badge.svg"
+          }
+        ],
+        "image_dir": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/tradecat",
+        "representative_image": {
+          "filename": "1_badge.svg",
+          "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/tradecat/1_badge.svg",
+          "size": 2262,
+          "content_type": "image/svg+xml; charset=utf-8",
+          "downloaded_at": "2026-01-05T04:01:57.285Z",
+          "original_url": "https://github.com/tukuaiai/tradecat/actions/workflows/ci.yml/badge.svg",
+          "absolute_url": "https://github.com/tukuaiai/tradecat/actions/workflows/ci.yml/badge.svg"
+        }
+      },
+      "activity_score": 53,
+      "popularity_score": 58,
+      "freshness_score": 100,
+      "overall_score": 65,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 6,
+      "name": "planning-with-files",
+      "full_name": "OthmanAdi/planning-with-files",
+      "owner": "OthmanAdi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/78882424?v=4",
+      "stars": 504,
+      "forks": 74,
+      "issues": 1,
+      "watchers": 504,
+      "description": "Claude Code skill implementing Manus-style persistent markdown planning — the workflow pattern behind the $2B acquisition.",
+      "homepage": "",
+      "clone_url": "https://github.com/OthmanAdi/planning-with-files.git",
+      "ssh_url": "git@github.com:OthmanAdi/planning-with-files.git",
+      "html_url": "https://github.com/OthmanAdi/planning-with-files",
+      "language": null,
+      "primary_language": "Unknown",
+      "languages": {},
+      "tech_stack": [
+        "TypeScript"
+      ],
+      "topics": [],
+      "created_at": "2026-01-03T07:37:28Z",
+      "updated_at": "2026-01-05T03:10:19Z",
+      "pushed_at": "2026-01-03T18:59:20Z",
+      "ai_summary": {
+        "summary": "复刻Meta 20亿美元收购的Manus工作流：用持久化Markdown文件做AI规划、进度追踪与知识沉淀，让Claude Code具备“上下文工程”能力。",
+        "highlights": [
+          "Manus同款$2B工作流",
+          "持久Markdown规划与复盘",
+          "Claude Code一键技能"
+        ],
+        "tech_summary": "TypeScript Claude Code扩展",
+        "use_case": "AI代理长周期任务规划与知识管理",
+        "source": "ai"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_license-mit-yellow.svg",
+            "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/planning-with-files/1_license-mit-yellow.svg",
+            "size": 1087,
+            "content_type": "image/svg+xml;charset=utf-8",
+            "downloaded_at": "2026-01-05T04:01:54.080Z",
+            "original_url": "https://img.shields.io/badge/License-MIT-yellow.svg",
+            "absolute_url": "https://img.shields.io/badge/License-MIT-yellow.svg"
+          }
+        ],
+        "image_dir": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/planning-with-files",
+        "representative_image": {
+          "filename": "1_license-mit-yellow.svg",
+          "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/planning-with-files/1_license-mit-yellow.svg",
+          "size": 1087,
+          "content_type": "image/svg+xml;charset=utf-8",
+          "downloaded_at": "2026-01-05T04:01:54.080Z",
+          "original_url": "https://img.shields.io/badge/License-MIT-yellow.svg",
+          "absolute_url": "https://img.shields.io/badge/License-MIT-yellow.svg"
+        }
+      },
+      "activity_score": 51,
+      "popularity_score": 56,
+      "freshness_score": 100,
+      "overall_score": 63,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 7,
+      "name": "smaug",
+      "full_name": "alexknowshtml/smaug",
+      "owner": "alexknowshtml",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3707?v=4",
+      "stars": 484,
+      "forks": 50,
+      "issues": 2,
+      "watchers": 484,
+      "description": "Archive your Twitter/X bookmarks to markdown. Automatically.  Like a dragon hoarding treasure, Smaug collects the valuable things you bookmark.",
+      "homepage": "",
+      "clone_url": "https://github.com/alexknowshtml/smaug.git",
+      "ssh_url": "git@github.com:alexknowshtml/smaug.git",
+      "html_url": "https://github.com/alexknowshtml/smaug",
+      "language": "JavaScript",
+      "primary_language": "JavaScript",
+      "languages": {
+        "JavaScript": 79557
+      },
+      "tech_stack": [
+        "JavaScript"
+      ],
+      "topics": [],
+      "created_at": "2026-01-02T02:55:25Z",
+      "updated_at": "2026-01-05T03:48:41Z",
+      "pushed_at": "2026-01-05T03:03:51Z",
+      "ai_summary": {
+        "summary": "一键把Twitter/X书签（及点赞）自动归档成Markdown，像巨龙囤宝般永久保存你的收藏。",
+        "highlights": [
+          "零配置自动同步",
+          "输出干净Markdown，方便本地搜索与备份",
+          "支持书签+点赞双模式"
+        ],
+        "tech_summary": "纯JavaScript CLI工具",
+        "use_case": "防止推文被删或账号丢失，长期保存高价值内容",
+        "source": "ai"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/smaug",
+        "representative_image": null
+      },
+      "activity_score": 52,
+      "popularity_score": 55,
+      "freshness_score": 100,
+      "overall_score": 63,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 8,
+      "name": "cc-mirror",
+      "full_name": "numman-ali/cc-mirror",
+      "owner": "numman-ali",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35879093?v=4",
+      "stars": 473,
+      "forks": 33,
+      "issues": 5,
+      "watchers": 473,
+      "description": "Create multiple isolated Claude Code variants with custom providers (Z.ai, MiniMax, OpenRouter, LiteLLM)",
+      "homepage": null,
+      "clone_url": "https://github.com/numman-ali/cc-mirror.git",
+      "ssh_url": "git@github.com:numman-ali/cc-mirror.git",
+      "html_url": "https://github.com/numman-ali/cc-mirror",
+      "language": "TypeScript",
+      "primary_language": "TypeScript",
+      "languages": {
+        "TypeScript": 557951,
+        "Shell": 9628,
+        "JavaScript": 1345
+      },
+      "tech_stack": [
+        "TypeScript",
+        "Shell",
+        "JavaScript"
+      ],
+      "topics": [],
+      "created_at": "2026-01-02T22:28:50Z",
+      "updated_at": "2026-01-05T04:00:09Z",
+      "pushed_at": "2026-01-05T01:04:08Z",
+      "ai_summary": {
+        "summary": "一键生成多个隔离的 Claude Code 实例，可自由切换 Z.ai、MiniMax、OpenRouter 等后端，解决单账号限速与供应商锁定问题。",
+        "highlights": [
+          "支持多供应商无缝切换",
+          "容器级隔离，配置互不干扰",
+          "npm 一键安装，脚本自动化部署"
+        ],
+        "tech_summary": "TypeScript + Shell 脚本",
+        "use_case": "需要同时调用多款 Claude 模型的开发团队与自动化流程",
+        "source": "ai"
+      },
+      "images": {
+        "total_count": 1,
+        "image_list": [
+          {
+            "filename": "1_cc-mirror-providers.png",
+            "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/cc-mirror/1_cc-mirror-providers.png",
+            "size": 298904,
+            "content_type": "image/png",
+            "downloaded_at": "2026-01-05T04:01:58.326Z",
+            "original_url": "./assets/cc-mirror-providers.png",
+            "absolute_url": "https://raw.githubusercontent.com/numman-ali/cc-mirror/main/assets/cc-mirror-providers.png"
+          }
+        ],
+        "image_dir": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/cc-mirror",
+        "representative_image": {
+          "filename": "1_cc-mirror-providers.png",
+          "filepath": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/cc-mirror/1_cc-mirror-providers.png",
+          "size": 298904,
+          "content_type": "image/png",
+          "downloaded_at": "2026-01-05T04:01:58.326Z",
+          "original_url": "./assets/cc-mirror-providers.png",
+          "absolute_url": "https://raw.githubusercontent.com/numman-ali/cc-mirror/main/assets/cc-mirror-providers.png"
+        }
+      },
+      "activity_score": 54,
+      "popularity_score": 54,
+      "freshness_score": 100,
+      "overall_score": 63,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 9,
+      "name": "zpdf",
+      "full_name": "Lulzx/zpdf",
+      "owner": "Lulzx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22330483?v=4",
+      "stars": 729,
+      "forks": 22,
+      "issues": 0,
+      "watchers": 729,
+      "description": "Zero-copy PDF text extraction library written in Zig. High-performance, memory-mapped parsing with SIMD acceleration.",
+      "homepage": "https://lulzx.com/zpdf",
+      "clone_url": "https://github.com/Lulzx/zpdf.git",
+      "ssh_url": "git@github.com:Lulzx/zpdf.git",
+      "html_url": "https://github.com/Lulzx/zpdf",
+      "language": "Zig",
+      "primary_language": "Zig",
+      "languages": {
+        "Zig": 394901,
+        "Python": 29047,
+        "HTML": 13837,
+        "Shell": 4129,
+        "C": 1386
+      },
+      "tech_stack": [
+        "Zig",
+        "Python",
+        "HTML",
+        "Shell",
+        "C",
+        "high-performance",
+        "parser",
+        "pdf"
+      ],
+      "topics": [
+        "high-performance",
+        "parser",
+        "pdf",
+        "simd",
+        "text-extraction",
+        "zero-copy",
+        "zero-dependency",
+        "zig"
+      ],
+      "created_at": "2025-12-30T18:09:29Z",
+      "updated_at": "2026-01-05T01:40:09Z",
+      "pushed_at": "2026-01-02T05:38:00Z",
+      "ai_summary": {
+        "summary": "Zig编写的高性能零拷贝PDF文本提取库，内存映射+SIMD加速，无需外部依赖即可快速抽字。",
+        "highlights": [
+          "零拷贝内存映射，极致省内存",
+          "SIMD加速，单文件即可解析",
+          "支持压缩、编码、标签PDF等完整特性"
+        ],
+        "tech_summary": "Zig单文件+SIMD高性能解析",
+        "use_case": "服务器端批量抽字、搜索索引、大数据文本挖掘",
+        "source": "ai"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/zpdf",
+        "representative_image": null
+      },
+      "activity_score": 48,
+      "popularity_score": 56,
+      "freshness_score": 100,
+      "overall_score": 62,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    },
+    {
+      "rank": 10,
+      "name": "Skills",
+      "full_name": "Dimillian/Skills",
+      "owner": "Dimillian",
+      "avatar_url": "https://avatars.githubusercontent.com/u/535509?v=4",
+      "stars": 502,
+      "forks": 24,
+      "issues": 0,
+      "watchers": 502,
+      "description": "My Codex Skills",
+      "homepage": "",
+      "clone_url": "https://github.com/Dimillian/Skills.git",
+      "ssh_url": "git@github.com:Dimillian/Skills.git",
+      "html_url": "https://github.com/Dimillian/Skills",
+      "language": "Python",
+      "primary_language": "Python",
+      "languages": {
+        "Python": 2480,
+        "Shell": 990
+      },
+      "tech_stack": [
+        "Python",
+        "Shell"
+      ],
+      "topics": [],
+      "created_at": "2025-12-30T14:36:32Z",
+      "updated_at": "2026-01-05T03:59:11Z",
+      "pushed_at": "2026-01-04T17:34:53Z",
+      "ai_summary": {
+        "summary": "为iOS/Swift开发者整理的可复用技能脚本集，一键完成发版日志、调试、代码质量检查等高频任务。",
+        "highlights": [
+          "覆盖iOS开发全流程常用脚本",
+          "即装即用，支持CODEX环境快速集成",
+          "内置预提交钩子，自动同步技能索引"
+        ],
+        "tech_summary": "Python+Shell脚本集合",
+        "use_case": "iOS项目发版、调试与代码维护自动化",
+        "source": "ai"
+      },
+      "images": {
+        "total_count": 0,
+        "image_list": [],
+        "image_dir": "/home/runner/work/GitHub-Trending-/GitHub-Trending-/images/2026/week-2/skills",
+        "representative_image": null
+      },
+      "activity_score": 50,
+      "popularity_score": 53,
+      "freshness_score": 100,
+      "overall_score": 62,
+      "trend": {
+        "status": "new",
+        "star_change": 0,
+        "rank_change": 0,
+        "is_new": true
+      }
+    }
+  ],
+  "statistics": {
+    "total_stars": 6338,
+    "total_forks": 654,
+    "average_stars": 634,
+    "average_forks": 65,
+    "top_languages": [
+      {
+        "name": "Python",
+        "count": 4
+      },
+      {
+        "name": "JavaScript",
+        "count": 2
+      },
+      {
+        "name": "Unknown",
+        "count": 2
+      },
+      {
+        "name": "TypeScript",
+        "count": 1
+      },
+      {
+        "name": "Zig",
+        "count": 1
+      }
+    ],
+    "top_topics": [
+      {
+        "name": "anthropic",
+        "count": 1
+      },
+      {
+        "name": "claude",
+        "count": 1
+      },
+      {
+        "name": "claude-code",
+        "count": 1
+      },
+      {
+        "name": "cli",
+        "count": 1
+      },
+      {
+        "name": "plugin",
+        "count": 1
+      },
+      {
+        "name": "statusline",
+        "count": 1
+      },
+      {
+        "name": "typescript",
+        "count": 1
+      },
+      {
+        "name": "ai",
+        "count": 1
+      },
+      {
+        "name": "binance",
+        "count": 1
+      },
+      {
+        "name": "bitcoin",
+        "count": 1
+      }
+    ],
+    "score_distribution": {
+      "min": 62,
+      "max": 68,
+      "average": 65,
+      "median": 64
+    }
+  },
+  "generated_at": "2026-01-05T04:01:58.334Z"
+}
