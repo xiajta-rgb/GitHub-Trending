@@ -1,16 +1,16 @@
 [
   {
     "year": "2026",
-    "week": "4",
-    "report_title": "2026年第4周GitHub趋势报告",
-    "total_repositories": 10,
-    "generation_date": "2026-01-21T01:39:35.391382"
+    "report_title": "GitHub趋势报告20260121",
+    "total_repositories": 3,
+    "generation_date": "2026-01-21T15:46:35.320252",
+    "week": "4"
   },
   {
     "year": "2026",
     "report_title": "GitHub趋势报告20260121",
     "total_repositories": 10,
-    "generation_date": "2026-01-21T01:59:18.893693",
+    "generation_date": "2026-01-21T15:47:55.332744",
     "date": "20260121"
   }
 ]

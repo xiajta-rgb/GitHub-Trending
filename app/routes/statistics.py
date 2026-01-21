@@ -77,10 +77,47 @@ def _get_statistics_data(db: Session):
                     new_projects_count += 1
                 
                 # 更新技术栈统计
+                # 1. 首先尝试从 tech_stack 中提取
+                tech_stack_extracted = False
                 if repo.tech_stack:
-                    for tech in repo.tech_stack:
-                        tech_stack_counts[tech] += 1
-                        seen_technologies.add(tech)
+                    # 处理 tech_stack 可能是字符串的情况
+                    tech_stack = repo.tech_stack
+                    if isinstance(tech_stack, str):
+                        try:
+                            import json
+                            tech_stack = json.loads(tech_stack)
+                        except:
+                            tech_stack = []
+                    # 确保 tech_stack 是列表
+                    if isinstance(tech_stack, list) and len(tech_stack) > 0:
+                        for tech in tech_stack:
+                            if tech:
+                                tech_stack_counts[tech] += 1
+                                seen_technologies.add(tech)
+                                tech_stack_extracted = True
+                
+                # 2. 如果 tech_stack 为空，尝试从 languages 字段中提取
+                if not tech_stack_extracted and repo.languages:
+                    languages = repo.languages
+                    if isinstance(languages, str):
+                        try:
+                            import json
+                            languages = json.loads(languages)
+                        except:
+                            languages = {}
+                    if isinstance(languages, dict):
+                        # 从 languages 字典中提取键作为技术栈
+                        for lang in languages.keys():
+                            if lang:
+                                tech_stack_counts[lang] += 1
+                                seen_technologies.add(lang)
+                                tech_stack_extracted = True
+                
+                # 3. 如果仍然为空，尝试从 primary_language 中提取
+                if not tech_stack_extracted and repo.primary_language and repo.primary_language != 'Unknown' and repo.primary_language != 'None':
+                    primary_language = repo.primary_language
+                    tech_stack_counts[primary_language] += 1
+                    seen_technologies.add(primary_language)
                 
                 # 更新编程语言统计
                 if repo.primary_language:
@@ -94,6 +131,24 @@ def _get_statistics_data(db: Session):
                 "projectsCount": len(week_repos),
                 "newProjectsCount": new_projects_count
             })
+        
+        # 计算记录的天数
+        if reports:
+            # 获取最早和最晚的报告日期
+            earliest_date = min(report.week_start for report in reports)
+            latest_date = max(report.week_end for report in reports)
+            
+            # 计算天数差
+            from datetime import datetime
+            if isinstance(earliest_date, str):
+                earliest_date = datetime.strptime(earliest_date, '%Y-%m-%d')
+            if isinstance(latest_date, str):
+                latest_date = datetime.strptime(latest_date, '%Y-%m-%d')
+            
+            # 计算天数差（+1 是因为包括开始和结束日期）
+            total_days = (latest_date - earliest_date).days + 1
+        else:
+            total_days = 0
         
         # 构建最终统计数据
         statistics = {
@@ -111,6 +166,7 @@ def _get_statistics_data(db: Session):
             ],
             "weeklyProjects": weekly_projects,
             "totalWeeks": len(reports),
+            "totalDays": total_days,
             "totalUniqueProjects": len(seen_projects),
             "totalUniqueTechnologies": len(seen_technologies),
             "totalUniqueLanguages": len(seen_languages)

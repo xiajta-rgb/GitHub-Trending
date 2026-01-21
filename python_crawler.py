@@ -144,13 +144,24 @@ class GitHubAPI:
             return full_info
         except Exception as e:
             print(f'处理仓库 {repo["full_name"]} 时出错: {e}')
-            # 即使出错也要返回基本信息
+            # 即使出错也要返回基本信息，并尝试从基本信息中提取技术栈
+            # 使用基本信息中的language作为primary_language
+            primary_language = repo.get('language', 'Unknown')
+            # 尝试从基本信息中提取技术栈
+            tech_stack = set()
+            # 添加主要语言
+            if primary_language and primary_language != 'Unknown' and primary_language != 'None':
+                tech_stack.add(primary_language)
+            # 添加topics
+            if repo.get('topics'):
+                tech_stack.update(repo['topics'])
+            
             return {
                 **repo,
                 'readme_content': '',
                 'languages': {},
-                'primary_language': repo.get('language', 'Unknown'),
-                'tech_stack': []
+                'primary_language': primary_language,
+                'tech_stack': list(tech_stack)
             }
     
     def get_repos_full_info(self, repos: List[Dict]) -> List[Dict]:

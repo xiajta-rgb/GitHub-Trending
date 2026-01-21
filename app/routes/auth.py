@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
+from pydantic import BaseModel
 from passlib.context import CryptContext
 import secrets
 
@@ -15,6 +16,11 @@ ADMIN_PASSWORD = "xiajta"
 # 注意：在实际生产环境中，密码哈希应该存储在数据库中
 # 密码 "xiajta" 的bcrypt哈希值
 ADMIN_PASSWORD_HASH = "$2b$12$I1G8hE5nG6kH7jI8lJ9mK0nL1oM2pN3qO4rP5sQ6tR7uS8vT9wU0xV1yW2z"
+
+# 登录请求模型
+class LoginRequest(BaseModel):
+    username: str
+    password: str
 
 # 由于bcrypt库问题，我们暂时使用简单的字符串比较作为替代方案
 # 注意：这不是安全的做法，仅用于演示
@@ -33,15 +39,25 @@ def get_current_admin(credentials: HTTPBasicCredentials = Depends(security)):
         raise HTTPException(
             status_code=401,
             detail="无效的用户名或密码",
-            headers={"WWW-Authenticate": "Basic"},
+            # 移除 WWW-Authenticate 头，避免触发浏览器原生登录对话框
         )
     return credentials.username
 
 @router.post("/login")
-def login(credentials: HTTPBasicCredentials = Depends(security)):
+def login(login_data: LoginRequest):
     """管理员登录"""
-    username = get_current_admin(credentials)
-    return {"message": f"欢迎 {username} 管理员！", "authenticated": True}
+    # 验证用户名和密码
+    is_correct_username = secrets.compare_digest(login_data.username, ADMIN_USERNAME)
+    is_correct_password = verify_password(login_data.password, ADMIN_PASSWORD_HASH)
+    
+    if not (is_correct_username and is_correct_password):
+        raise HTTPException(
+            status_code=401,
+            detail="无效的用户名或密码",
+            # 移除 WWW-Authenticate 头，避免触发浏览器原生登录对话框
+        )
+    
+    return {"message": f"欢迎 {login_data.username} 管理员！", "authenticated": True}
 
 @router.post("/logout")
 def logout():

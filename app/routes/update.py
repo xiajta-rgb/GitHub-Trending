@@ -4,10 +4,11 @@ import subprocess
 import sys
 import json
 import os
+import secrets
 from datetime import datetime, timedelta
 from database import get_db
 from app.models import WeeklyReport, Repository
-from app.routes.auth import get_current_admin
+from app.routes.auth import LoginRequest, verify_password, ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_PASSWORD_HASH
 
 router = APIRouter()
 
@@ -27,9 +28,20 @@ def get_crawl_progress():
 
 
 @router.post("/trending/update")
-def update_trending(db: Session = Depends(get_db), admin: str = Depends(get_current_admin)):
+def update_trending(login_data: LoginRequest, db: Session = Depends(get_db)):
     """更新趋势数据（调用爬虫脚本）"""
     try:
+        # 验证用户名和密码
+        is_correct_username = secrets.compare_digest(login_data.username, ADMIN_USERNAME)
+        is_correct_password = verify_password(login_data.password, ADMIN_PASSWORD_HASH)
+        
+        if not (is_correct_username and is_correct_password):
+            raise HTTPException(
+                status_code=401,
+                detail="无效的用户名或密码",
+                # 移除 WWW-Authenticate 头，避免触发浏览器原生登录对话框
+            )
+        
         # 重置进度
         global crawl_progress
         crawl_progress = {
@@ -74,8 +86,9 @@ def update_trending(db: Session = Depends(get_db), admin: str = Depends(get_curr
         
         # 执行爬虫脚本并将输出保存到临时文件
         print("开始执行爬虫脚本...")
+        # 使用明确的 python3 命令，避免 sys.executable 指向 uwsgi 导致的参数冲突
         result = subprocess.run(
-            [sys.executable, script_path, "--limit", "10", "--since", "daily"],
+            ["python3", script_path, "--limit", "10", "--since", "daily"],
             capture_output=True,
             text=True,
             encoding='utf-8',
@@ -165,32 +178,57 @@ def update_trending(db: Session = Depends(get_db), admin: str = Depends(get_curr
             owner_name = repo_data["owner"]["login"] if "owner" in repo_data and repo_data["owner"] else ""
             avatar_url = repo_data["owner"]["avatar_url"] if "owner" in repo_data and repo_data["owner"] else ""
             
-            # 创建Repository对象
-            repository = Repository(
-                full_name=repo_data["full_name"],
-                name=repo_data["name"],
-                owner=owner_name,
-                avatar_url=avatar_url,
-                stars=repo_data["stargazers_count"] if "stargazers_count" in repo_data else 0,
-                forks=repo_data["forks_count"] if "forks_count" in repo_data else 0,
-                issues=repo_data["open_issues_count"] if "open_issues_count" in repo_data else 0,
-                watchers=repo_data["watchers_count"] if "watchers_count" in repo_data else 0,
-                description=repo_data["description"],
-                html_url=repo_data["html_url"],
-                language=repo_data["language"],
-                primary_language=repo_data["primary_language"],
-                languages=repo_data["languages"],
-                tech_stack=repo_data["tech_stack"],
-                topics=repo_data["topics"],
-                created_at=datetime.fromisoformat(repo_data["created_at"].replace("Z", "")) if "created_at" in repo_data else None,
-                updated_at=datetime.fromisoformat(repo_data["updated_at"].replace("Z", "")) if "updated_at" in repo_data else None,
-                pushed_at=datetime.fromisoformat(repo_data["pushed_at"].replace("Z", "")) if "pushed_at" in repo_data else None,
-                weekly_report_id=weekly_report.id,
-                rank=i + 1
-            )
+            # 检查仓库是否已存在
+            existing_repo = db.query(Repository).filter(
+                Repository.full_name == repo_data["full_name"]
+            ).first()
             
-            # 保存仓库到数据库
-            db.add(repository)
+            if existing_repo:
+                # 如果仓库已存在，更新其信息
+                existing_repo.name = repo_data["name"]
+                existing_repo.owner = owner_name
+                existing_repo.avatar_url = avatar_url
+                existing_repo.stars = repo_data["stargazers_count"] if "stargazers_count" in repo_data else 0
+                existing_repo.forks = repo_data["forks_count"] if "forks_count" in repo_data else 0
+                existing_repo.issues = repo_data["open_issues_count"] if "open_issues_count" in repo_data else 0
+                existing_repo.watchers = repo_data["watchers_count"] if "watchers_count" in repo_data else 0
+                existing_repo.description = repo_data["description"]
+                existing_repo.html_url = repo_data["html_url"]
+                existing_repo.language = repo_data["language"]
+                existing_repo.primary_language = repo_data["primary_language"]
+                existing_repo.languages = repo_data["languages"]
+                existing_repo.tech_stack = repo_data["tech_stack"]
+                existing_repo.topics = repo_data["topics"]
+                existing_repo.created_at = datetime.fromisoformat(repo_data["created_at"].replace("Z", "")) if "created_at" in repo_data else None
+                existing_repo.updated_at = datetime.fromisoformat(repo_data["updated_at"].replace("Z", "")) if "updated_at" in repo_data else None
+                existing_repo.pushed_at = datetime.fromisoformat(repo_data["pushed_at"].replace("Z", "")) if "pushed_at" in repo_data else None
+                existing_repo.weekly_report_id = weekly_report.id
+                existing_repo.rank = i + 1
+            else:
+                # 如果仓库不存在，创建新记录
+                repository = Repository(
+                    full_name=repo_data["full_name"],
+                    name=repo_data["name"],
+                    owner=owner_name,
+                    avatar_url=avatar_url,
+                    stars=repo_data["stargazers_count"] if "stargazers_count" in repo_data else 0,
+                    forks=repo_data["forks_count"] if "forks_count" in repo_data else 0,
+                    issues=repo_data["open_issues_count"] if "open_issues_count" in repo_data else 0,
+                    watchers=repo_data["watchers_count"] if "watchers_count" in repo_data else 0,
+                    description=repo_data["description"],
+                    html_url=repo_data["html_url"],
+                    language=repo_data["language"],
+                    primary_language=repo_data["primary_language"],
+                    languages=repo_data["languages"],
+                    tech_stack=repo_data["tech_stack"],
+                    topics=repo_data["topics"],
+                    created_at=datetime.fromisoformat(repo_data["created_at"].replace("Z", "")) if "created_at" in repo_data else None,
+                    updated_at=datetime.fromisoformat(repo_data["updated_at"].replace("Z", "")) if "updated_at" in repo_data else None,
+                    pushed_at=datetime.fromisoformat(repo_data["pushed_at"].replace("Z", "")) if "pushed_at" in repo_data else None,
+                    weekly_report_id=weekly_report.id,
+                    rank=i + 1
+                )
+                db.add(repository)
         
         # 提交所有更改
         db.commit()

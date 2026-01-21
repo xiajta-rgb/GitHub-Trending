@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
+import secrets
 from database import get_db
 from app.models import WeeklyReport, Repository
 from app.services.github_api import GitHubAPI
 from app.services.data_processor import DataProcessor
-from app.routes.auth import get_current_admin
+from app.routes.auth import LoginRequest, verify_password, ADMIN_USERNAME, ADMIN_PASSWORD, ADMIN_PASSWORD_HASH
 
 router = APIRouter()
 
@@ -362,9 +363,20 @@ def get_weekly_data(year: int, week: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/id/{id}")
-def delete_weekly_data(id: int, db: Session = Depends(get_db), admin: str = Depends(get_current_admin)):
+def delete_weekly_data(id: int, login_data: LoginRequest, db: Session = Depends(get_db)):
     """删除指定ID的周报数据"""
     try:
+        # 验证用户名和密码
+        is_correct_username = secrets.compare_digest(login_data.username, ADMIN_USERNAME)
+        is_correct_password = verify_password(login_data.password, ADMIN_PASSWORD_HASH)
+        
+        if not (is_correct_username and is_correct_password):
+            raise HTTPException(
+                status_code=401,
+                detail="无效的用户名或密码",
+                # 移除 WWW-Authenticate 头，避免触发浏览器原生登录对话框
+            )
+        
         # 获取指定ID的周报
         report = db.query(WeeklyReport).filter(
             WeeklyReport.id == id

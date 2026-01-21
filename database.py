@@ -9,7 +9,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # 数据库配置
-SQLALCHEMY_DATABASE_URL = "sqlite:///./github_trending.db"
+from config import sqlalchemy_database_url, db_path
+
+# 使用配置管理模块的数据库 URL
+SQLALCHEMY_DATABASE_URL = sqlalchemy_database_url
+print(f"使用数据库: {db_path}")
 
 # 创建数据库引擎
 engine = create_engine(

@@ -1,3 +1,23 @@
+// 环境配置
+// 自动检测当前环境，根据页面 URL 判断
+const currentUrl = window.location.origin;
+const isProduction = currentUrl === 'https://trend.pythonanywhere.com';
+const isLocal = currentUrl === 'http://localhost:8000' || currentUrl === 'http://127.0.0.1:8000';
+
+// 根据环境设置 API 基础 URL
+let API_BASE_URL;
+if (isProduction) {
+    API_BASE_URL = 'https://trend.pythonanywhere.com';
+} else if (isLocal) {
+    API_BASE_URL = currentUrl;
+} else {
+    // 默认使用本地环境
+    API_BASE_URL = 'http://localhost:8000';
+}
+
+console.log('当前环境:', isProduction ? '生产环境' : '本地环境');
+console.log('API 基础 URL:', API_BASE_URL);
+
 // DOM 元素
 const loading = document.getElementById('loading');
 const latestSection = document.getElementById('latest-section');
@@ -116,8 +136,13 @@ function checkAuthStatus() {
 // 更新认证相关UI
 function updateAuthUI() {
     if (isAuthenticated && adminUser) {
-        adminLoginBtn.style.display = 'none';
-        adminLogoutItem.style.display = 'block';
+        // 登录状态：隐藏登录按钮，显示退出登录按钮
+        if (adminLoginBtn) {
+            adminLoginBtn.style.display = 'none';
+        }
+        if (adminLogoutItem) {
+            adminLogoutItem.style.display = 'block';
+        }
         
         // 只有当adminUsername元素存在时才设置textContent
         if (adminUsername) {
@@ -133,8 +158,13 @@ function updateAuthUI() {
             document.getElementById('history-link').parentElement.style.display = 'block';
         }
     } else {
-        adminLoginBtn.style.display = 'block';
-        adminLogoutItem.style.display = 'none';
+        // 未登录状态：显示登录按钮，隐藏退出登录按钮
+        if (adminLoginBtn) {
+            adminLoginBtn.style.display = 'block';
+        }
+        if (adminLogoutItem) {
+            adminLogoutItem.style.display = 'none';
+        }
         
         // 未登录时隐藏更新按钮
         if (document.getElementById('update-data-btn')) {
@@ -181,13 +211,13 @@ loginForm.addEventListener('submit', async (e) => {
     }
 
     try {
-        const credentials = btoa(`${username}:${password}`);
-        const response = await fetch('http://localhost:8000/api/auth/login', {
+        const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
             method: 'POST',
             headers: {
-                'Authorization': `Basic ${credentials}`,
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify({ username, password }),
+            credentials: 'include' // 添加此选项，确保跨域请求能够正确发送认证凭据
         });
 
         if (response.ok) {
@@ -228,8 +258,7 @@ adminLogoutBtn.addEventListener('click', () => {
 // 爬取数据功能（需要管理员权限）
 async function crawlTrendingData() {
     if (!isAuthenticated) {
-        showToast('请先登录管理员账号', 'warning');
-        loginModal.show();
+        
         return;
     }
 
@@ -268,17 +297,30 @@ async function crawlTrendingData() {
                 return;
             }
             
-            // 构建Basic Auth凭据
-            const basicAuth = btoa(`${credentials.username}:${credentials.password}`);
+            // 构建请求数据（使用请求体认证，与登录时相同）
+            const requestData = {
+                username: credentials.username,
+                password: credentials.password
+            };
+            console.log('发送的认证数据:', requestData);
             
             // 开始轮询进度
-            const progressInterval = setInterval(async () => {
+            let progressInterval;
+            
+            // 发送爬取请求
+            const responsePromise = fetch(`${API_BASE_URL}/api/update/trending/update`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData),
+                credentials: 'include' // 添加此选项，确保跨域请求能够正确发送认证凭据
+            });
+
+            // 开始轮询进度，直到收到响应
+            progressInterval = setInterval(async () => {
                 try {
-                    const progressResponse = await fetch('http://localhost:8000/api/update/trending/update/progress', {
-                        headers: {
-                            'Authorization': `Basic ${basicAuth}`
-                        }
-                    });
+                    const progressResponse = await fetch(`${API_BASE_URL}/api/update/trending/update/progress`);
                     
                     if (progressResponse.ok) {
                         const progressData = await progressResponse.json();
@@ -293,32 +335,19 @@ async function crawlTrendingData() {
                             progressMessage.textContent = progressData.message || '爬取中...';
                         }
                         
-                        if (progressData.status === 'completed' || progressData.status === 'failed') {
-                            clearInterval(progressInterval);
-                            
-                            if (progressData.status === 'failed') {
-                                showToast(`爬取失败: ${progressData.message}`, 'error');
-                            }
-                        }
+                        // 不要在这里停止轮询，直到收到响应
                     }
                 } catch (error) {
                     console.error('获取进度失败:', error);
                 }
             }, 1000);
 
-            // 发送爬取请求
-            const response = await fetch('http://localhost:8000/api/update/trending/update', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Basic ${basicAuth}`,
-                    'Content-Type': 'application/json'
-                }
-            });
+            // 等待爬取请求完成
+            const response = await responsePromise;
+            const data = await response.json();
 
             // 停止轮询
             clearInterval(progressInterval);
-            
-            const data = await response.json();
             
             // 隐藏进度条
             if (progressDiv) {
@@ -387,6 +416,11 @@ function toggleDarkMode() {
     } else {
         enableDarkMode();
     }
+    
+    // 重新渲染图表以更新颜色
+    if (dashboardSection.style.display === 'block') {
+        getStatistics();
+    }
 }
 
 // 启用夜间模式
@@ -439,7 +473,7 @@ function showToast(message, type = 'info', duration = 3000) {
             break;
         case 'warning':
             bgColor = 'bg-warning';
-            textColor = 'text-dark';
+            textColor = 'text-dark'; // 警告信息始终使用黑色文字，确保在任何模式下都清晰可见
             borderColor = 'border-warning';
             iconClass = 'fa-exclamation-triangle';
             break;
@@ -450,6 +484,17 @@ function showToast(message, type = 'info', duration = 3000) {
             borderColor = 'border-info';
             iconClass = 'fa-info-circle';
             break;
+    }
+    
+    // 检查当前是否为日间模式（通过检查body是否有dark类）
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    
+    // 在日间模式下，确保所有提示都有黑色文字，以便在浅色背景下清晰可见
+    if (!isDarkMode) {
+        // 对于非警告类型的提示，在日间模式下使用黑色文字
+        if (type !== 'warning') {
+            textColor = 'text-dark';
+        }
     }
 
     // 构建 toast HTML
@@ -563,7 +608,7 @@ const repoModalBody = document.getElementById('repo-modal-body');
 const repoVisitBtn = document.getElementById('repo-visit-btn');
     
 // 仪表盘相关元素
-const totalWeeksEl = document.getElementById('total-weeks');
+const totalDaysEl = document.getElementById('total-weeks');
 const totalUniqueProjectsEl = document.getElementById('total-unique-projects');
 const totalUniqueTechnologiesEl = document.getElementById('total-unique-technologies');
 const totalUniqueLanguagesEl = document.getElementById('total-unique-languages');
@@ -611,6 +656,11 @@ function getTrendBadge(trend) {
             badgeClass = 'bg-danger';
             icon = 'fa fa-arrow-down';
             text = '下降';
+        } else if (trend.status === 'stable') {
+            // 明确处理稳定状态
+            badgeClass = 'bg-secondary';
+            icon = 'fa fa-minus';
+            text = '稳定';
         }
         
         return `<span class="badge ${badgeClass} trend-badge"><i class="fa ${icon}"></i> ${text}</span>`;
@@ -716,7 +766,7 @@ async function getLatestTrendingData() {
     
     try {
         // 添加随机参数避免浏览器缓存
-        const url = `http://localhost:8000/api/trending/latest?_=${Date.now()}`;
+        const url = `${API_BASE_URL}/api/trending/latest?_=${Date.now()}`;
         const response = await fetch(url, { cache: 'no-cache' });
         
         if (response.ok) {
@@ -726,14 +776,32 @@ async function getLatestTrendingData() {
                 const { metadata, repositories } = result.data;
                 showReportInfo(metadata);
                 
+                // 获取历史数据用于计算趋势
+                let historicalData = [];
+                try {
+                    const historyResponse = await fetch(`${API_BASE_URL}/api/trending/history?_=${Date.now()}`, { cache: 'no-cache' });
+                    if (historyResponse.ok) {
+                        const historyResult = await historyResponse.json();
+                        if (historyResult.success) {
+                            // 获取最近的几期历史数据（最多5期）
+                            historicalData = historyResult.data.slice(0, 5);
+                        }
+                    }
+                } catch (historyError) {
+                    console.warn('获取历史数据失败，使用默认趋势计算:', historyError);
+                }
+                
+                // 计算每个项目的趋势状态
+                const processedRepositories = await calculateTrendStatus(repositories, historicalData);
+                
                 // 存储当前仓库数据
-                currentRepositories = repositories;
+                currentRepositories = processedRepositories;
                 
                 // 显示报告信息
                 reportInfo.style.display = 'block';
                 
                 // 生成项目卡片
-                repoList.innerHTML = repositories.map((repo, index) => generateRepoCard(repo, index)).join('');
+                repoList.innerHTML = processedRepositories.map((repo, index) => generateRepoCard(repo, index)).join('');
             } else {
                 repoList.innerHTML = `<div class="col-12 text-center"><div class="alert alert-danger">获取数据失败：${result.error || '未知错误'}</div></div>`;
                 reportInfo.style.display = 'none';
@@ -757,6 +825,83 @@ async function getLatestTrendingData() {
 // 全局变量用于管理历史数据
 let allHistoryData = [];
 let selectedItems = new Set();
+
+// 计算项目趋势状态
+async function calculateTrendStatus(currentRepos, historicalData) {
+    // 创建当前项目的映射，按 full_name 索引
+    const currentRepoMap = new Map();
+    currentRepos.forEach((repo, index) => {
+        currentRepoMap.set(repo.full_name, {
+            ...repo,
+            currentRank: index + 1
+        });
+    });
+    
+    // 收集历史项目数据
+    const historicalRepoData = [];
+    
+    // 遍历历史数据，获取每一期的项目信息
+    for (const historyItem of historicalData) {
+        try {
+            // 获取该期的详细数据
+            const detailResponse = await fetch(`${API_BASE_URL}/api/trending/weekly/${historyItem.id}?_=${Date.now()}`, { cache: 'no-cache' });
+            if (detailResponse.ok) {
+                const detailResult = await detailResponse.json();
+                if (detailResult.success && detailResult.data.repositories) {
+                    const weekRepos = detailResult.data.repositories;
+                    // 为每个项目记录该期的排名
+                    const repoRankMap = new Map();
+                    weekRepos.forEach((repo, index) => {
+                        repoRankMap.set(repo.full_name, index + 1);
+                    });
+                    historicalRepoData.push({
+                        id: historyItem.id,
+                        week_start: historyItem.week_start,
+                        repoRankMap: repoRankMap
+                    });
+                }
+            }
+        } catch (detailError) {
+            console.warn(`获取历史报告 ${historyItem.id} 详情失败:`, detailError);
+        }
+    }
+    
+    // 计算每个项目的趋势状态
+    return currentRepos.map((repo, index) => {
+        const currentRank = index + 1;
+        let isNew = true;
+        let previousRank = null;
+        
+        // 查找该项目在历史数据中的排名
+        for (const historyRepoData of historicalRepoData) {
+            if (historyRepoData.repoRankMap.has(repo.full_name)) {
+                previousRank = historyRepoData.repoRankMap.get(repo.full_name);
+                isNew = false;
+                break; // 只需要最近一期的排名
+            }
+        }
+        
+        // 确定趋势状态
+        let trendStatus = {
+            is_new: isNew
+        };
+        
+        if (!isNew && previousRank !== null) {
+            if (currentRank < previousRank) {
+                trendStatus.status = 'rising';
+            } else if (currentRank > previousRank) {
+                trendStatus.status = 'falling';
+            } else {
+                trendStatus.status = 'stable';
+            }
+        }
+        
+        return {
+            ...repo,
+            trend: trendStatus
+        };
+    });
+}
     
 // 获取历史数据列表
 async function getHistoryList() {
@@ -771,7 +916,7 @@ async function getHistoryList() {
     showLoading();
     
     try {
-        const response = await fetch('http://localhost:8000/api/trending/history', { cache: 'no-cache' });
+        const response = await fetch(`${API_BASE_URL}/api/trending/history`, { cache: 'no-cache' });
         
         if (response.ok) {
             const result = await response.json();
@@ -800,6 +945,9 @@ async function getHistoryList() {
     
 // 渲染历史数据表
 function renderHistoryTable(history) {
+    // 清空选中项集合，因为表格将被重新渲染
+    selectedItems.clear();
+    
     // 生成统计信息
     const stats = `
         <div class="alert alert-info mb-4 d-flex justify-content-between align-items-center">
@@ -858,6 +1006,9 @@ function renderHistoryTable(history) {
         `;
     
     historyList.innerHTML = stats + table;
+    
+    // 更新批量删除按钮状态
+    updateBatchDeleteButton();
     
     // 绑定复选框事件
     bindCheckboxEvents();
@@ -980,14 +1131,20 @@ async function batchDeleteHistoryData() {
                         return;
                     }
                     
-                    // 构建Basic Auth凭据
-                    const basicAuth = btoa(`${credentials.username}:${credentials.password}`);
+                    // 构建请求数据（使用请求体认证，与登录时相同）
+                    const requestData = {
+                        username: credentials.username,
+                        password: credentials.password
+                    };
+                    console.log('发送的认证数据:', requestData);
                     
-                    const response = await fetch(`http://localhost:8000/api/trending/id/${id}`, {
+                    const response = await fetch(`${API_BASE_URL}/api/trending/id/${id}`, {
                         method: 'DELETE',
                         headers: {
-                            'Authorization': `Basic ${basicAuth}`
-                        }
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(requestData),
+                        credentials: 'include' // 添加此选项，确保跨域请求能够正确发送认证凭据
                     });
                     
                     if (response.ok) {
@@ -1059,14 +1216,20 @@ async function deleteHistoryData(id) {
                 return;
             }
             
-            // 构建Basic Auth凭据
-            const basicAuth = btoa(`${credentials.username}:${credentials.password}`);
+            // 构建请求数据（使用请求体认证，与登录时相同）
+            const requestData = {
+                username: credentials.username,
+                password: credentials.password
+            };
+            console.log('发送的认证数据:', requestData);
             
-            const response = await fetch(`http://localhost:8000/api/trending/id/${id}`, {
+            const response = await fetch(`${API_BASE_URL}/api/trending/id/${id}`, {
                 method: 'DELETE',
                 headers: {
-                    'Authorization': `Basic ${basicAuth}`
-                }
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData),
+                credentials: 'include' // 添加此选项，确保跨域请求能够正确发送认证凭据
             });
             
             if (response.ok) {
@@ -1101,7 +1264,7 @@ async function getWeeklyData(year, week) {
     showLoading();
     
     try {
-        const response = await fetch(`http://localhost:8000/api/trending/${year}/${week}`);
+        const response = await fetch(`${API_BASE_URL}/api/trending/${year}/${week}`);
         const result = await response.json();
         
         if (result.success) {
@@ -1142,7 +1305,7 @@ async function viewWeeklyData(id) {
     
     try {
         // 使用完整的URL并添加随机参数避免缓存
-        const url = `http://localhost:8000/api/trending/id/${id}?_=${Date.now()}`;
+        const url = `${API_BASE_URL}/api/trending/id/${id}?_=${Date.now()}`;
         const response = await fetch(url, { cache: 'no-cache' });
         
         if (response.ok) {
@@ -1219,7 +1382,7 @@ async function getStatistics() {
     
     try {
         console.log('API路径:', '/api/trending/statistics');
-        const response = await fetch('http://localhost:8000/api/trending/statistics');
+        const response = await fetch(`${API_BASE_URL}/api/trending/statistics`);
         console.log('响应状态:', response.status);
         const result = await response.json();
         console.log('响应数据:', result);
@@ -1247,7 +1410,7 @@ async function getStatistics() {
     
 // 更新统计卡片
 function updateStatCards(statistics) {
-    totalWeeksEl.textContent = statistics.totalWeeks;
+    totalDaysEl.textContent = statistics.totalDays;
     totalUniqueProjectsEl.textContent = statistics.totalUniqueProjects;
     totalUniqueTechnologiesEl.textContent = statistics.totalUniqueTechnologies;
     totalUniqueLanguagesEl.textContent = statistics.totalUniqueLanguages;
@@ -1307,9 +1470,27 @@ function renderCharts(statistics) {
     renderProjectCountsChart(projectCounts.slice(0, 10));
 }
     
+// 获取当前模式的文字颜色
+function getChartTextColor() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    return isDarkMode ? '#ffffff' : '#1e293b';
+}
+
+// 获取当前模式的网格线颜色
+function getChartGridColor() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    return isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+}
+
 // 渲染每周新上榜项目数量趋势图
 function renderWeeklyProjectsChart(data) {
     const ctx = document.getElementById('weekly-projects-chart').getContext('2d');
+    
+    // 获取当前模式
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    // 获取当前模式的文字颜色
+    const textColor = getChartTextColor();
+    const gridColor = getChartGridColor();
     
     // 处理空数据
     if (!data || data.length === 0) {
@@ -1331,17 +1512,18 @@ function renderWeeklyProjectsChart(data) {
                 legend: {
                     position: 'top',
                     labels: {
-                        color: '#ffffff' // 设置图例文字颜色为白色
+                        color: textColor // 根据当前模式设置图例文字颜色
                     }
                 },
                 title: {
                     display: true,
                     text: '每周新上榜项目数量趋势',
-                    color: '#ffffff' // 设置标题文字颜色为白色
+                    color: textColor // 根据当前模式设置标题文字颜色
                 },
                 tooltip: {
-                    titleColor: '#ffffff', // 设置工具提示标题颜色为白色
-                    bodyColor: '#ffffff' // 设置工具提示内容颜色为白色
+                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
                 }
             }
         }
@@ -1373,18 +1555,18 @@ function renderWeeklyProjectsChart(data) {
                     beginAtZero: true,
                     ticks: {
                         stepSize: 1,
-                        color: '#ffffff' // 设置Y轴刻度文字颜色为白色
+                        color: textColor // 根据当前模式设置Y轴刻度文字颜色
                     },
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.1)' // 设置Y轴网格线颜色为半透明白色
+                        color: gridColor // 根据当前模式设置Y轴网格线颜色
                     }
                 },
                 x: {
                     ticks: {
-                        color: '#ffffff' // 设置X轴刻度文字颜色为白色
+                        color: textColor // 根据当前模式设置X轴刻度文字颜色
                     },
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.1)' // 设置X轴网格线颜色为半透明白色
+                        color: gridColor // 根据当前模式设置X轴网格线颜色
                     }
                 }
             },
@@ -1392,17 +1574,18 @@ function renderWeeklyProjectsChart(data) {
                 legend: {
                     position: 'top',
                     labels: {
-                        color: '#ffffff' // 设置图例文字颜色为白色
+                        color: textColor // 根据当前模式设置图例文字颜色
                     }
                 },
                 title: {
                     display: true,
                     text: '每周新上榜项目数量趋势',
-                    color: '#ffffff' // 设置标题文字颜色为白色
+                    color: textColor // 根据当前模式设置标题文字颜色
                 },
                 tooltip: {
-                    titleColor: '#ffffff', // 设置工具提示标题颜色为白色
-                    bodyColor: '#ffffff' // 设置工具提示内容颜色为白色
+                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
                 }
             }
         }
@@ -1413,6 +1596,11 @@ function renderWeeklyProjectsChart(data) {
 function renderTopLanguagesChart(data) {
     const ctx = document.getElementById('top-languages-chart').getContext('2d');
     
+    // 获取当前模式
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    // 获取当前模式的文字颜色
+    const textColor = getChartTextColor();
+    
     // 处理空数据
     if (!data || data.length === 0) {
         topLanguagesChart = new Chart(ctx, {
@@ -1422,7 +1610,7 @@ function renderTopLanguagesChart(data) {
                 datasets: [{
                     data: [1],
                     backgroundColor: ['#CCCCCC'],
-                    borderColor: '#ffffff',
+                    borderColor: textColor,
                     borderWidth: 2
                 }]
             },
@@ -1430,11 +1618,20 @@ function renderTopLanguagesChart(data) {
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'bottom'
+                        position: 'bottom',
+                        labels: {
+                            color: textColor // 根据当前模式设置图例文字颜色
+                        }
                     },
                     title: {
                         display: true,
-                        text: '热门编程语言分布'
+                        text: '热门编程语言分布',
+                        color: textColor // 根据当前模式设置标题文字颜色
+                    },
+                    tooltip: {
+                        titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                        bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                        backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
                     }
                 }
             }
@@ -1456,7 +1653,7 @@ function renderTopLanguagesChart(data) {
             datasets: [{
                 data: counts,
                 backgroundColor: backgroundColors,
-                borderColor: '#ffffff',
+                borderColor: textColor,
                 borderWidth: 2
             }]
         },
@@ -1466,17 +1663,18 @@ function renderTopLanguagesChart(data) {
                 legend: {
                     position: 'bottom',
                     labels: {
-                        color: '#ffffff' // 设置图例文字颜色为白色
+                        color: textColor // 根据当前模式设置图例文字颜色
                     }
                 },
                 title: {
                     display: true,
                     text: '热门编程语言分布',
-                    color: '#ffffff' // 设置标题文字颜色为白色
+                    color: textColor // 根据当前模式设置标题文字颜色
                 },
                 tooltip: {
-                    titleColor: '#ffffff', // 设置工具提示标题颜色为白色
-                    bodyColor: '#ffffff', // 设置工具提示内容颜色为白色
+                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)', // 根据当前模式设置工具提示背景颜色
                     callbacks: {
                         label: function(context) {
                             const label = context.label || '';
@@ -1495,6 +1693,12 @@ function renderTopLanguagesChart(data) {
 // 渲染热门技术栈柱状图
 function renderTopTechnologiesChart(data) {
     const ctx = document.getElementById('top-technologies-chart').getContext('2d');
+    
+    // 获取当前模式
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    // 获取当前模式的文字颜色
+    const textColor = getChartTextColor();
+    const gridColor = getChartGridColor();
     
     // 处理空数据
     if (!data || data.length === 0) {
@@ -1516,18 +1720,19 @@ function renderTopTechnologiesChart(data) {
                     legend: {
                         position: 'top',
                         labels: {
-                            color: '#ffffff' // 设置图例文字颜色为白色
+                            color: textColor // 根据当前模式设置图例文字颜色
                         }
                     },
                     title: {
                         display: true,
                         text: '热门技术栈分布',
-                        color: '#ffffff' // 设置标题文字颜色为白色
+                        color: textColor // 根据当前模式设置标题文字颜色
                     },
                     tooltip: {
-                        titleColor: '#ffffff', // 设置工具提示标题颜色为白色
-                        bodyColor: '#ffffff' // 设置工具提示内容颜色为白色
-                    }
+                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
+                }
                 }
             }
         });
@@ -1555,20 +1760,20 @@ function renderTopTechnologiesChart(data) {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        color: '#ffffff' // 设置Y轴刻度文字颜色为白色
+                        color: textColor // 根据当前模式设置Y轴刻度文字颜色
                     },
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.1)' // 设置Y轴网格线颜色为半透明白色
+                        color: gridColor // 根据当前模式设置Y轴网格线颜色
                     }
                 },
                 x: {
                     ticks: {
                         maxRotation: 45,
                         minRotation: 45,
-                        color: '#ffffff' // 设置X轴刻度文字颜色为白色
+                        color: textColor // 根据当前模式设置X轴刻度文字颜色
                     },
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.1)' // 设置X轴网格线颜色为半透明白色
+                        color: gridColor // 根据当前模式设置X轴网格线颜色
                     }
                 }
             },
@@ -1576,17 +1781,18 @@ function renderTopTechnologiesChart(data) {
                 legend: {
                     position: 'top',
                     labels: {
-                        color: '#ffffff' // 设置图例文字颜色为白色
+                        color: textColor // 根据当前模式设置图例文字颜色
                     }
                 },
                 title: {
                     display: true,
                     text: '热门技术栈Top 10',
-                    color: '#ffffff' // 设置标题文字颜色为白色
+                    color: textColor // 根据当前模式设置标题文字颜色
                 },
                 tooltip: {
-                    titleColor: '#ffffff', // 设置工具提示标题颜色为白色
-                    bodyColor: '#ffffff' // 设置工具提示内容颜色为白色
+                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
                 }
             }
         }
@@ -1596,6 +1802,12 @@ function renderTopTechnologiesChart(data) {
 // 渲染项目上榜次数Top 10柱状图
 function renderProjectCountsChart(data) {
     const ctx = document.getElementById('project-counts-chart').getContext('2d');
+    
+    // 获取当前模式
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    // 获取当前模式的文字颜色
+    const textColor = getChartTextColor();
+    const gridColor = getChartGridColor();
     
     // 处理空数据
     if (!data || data.length === 0) {
@@ -1617,18 +1829,19 @@ function renderProjectCountsChart(data) {
                     legend: {
                         position: 'top',
                         labels: {
-                            color: '#ffffff' // 设置图例文字颜色为白色
+                            color: textColor // 根据当前模式设置图例文字颜色
                         }
                     },
                     title: {
                         display: true,
                         text: '项目上榜次数Top 10',
-                        color: '#ffffff' // 设置标题文字颜色为白色
+                        color: textColor // 根据当前模式设置标题文字颜色
                     },
                     tooltip: {
-                        titleColor: '#ffffff', // 设置工具提示标题颜色为白色
-                        bodyColor: '#ffffff' // 设置工具提示内容颜色为白色
-                    }
+                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
+                }
                 }
             }
         });
@@ -1656,20 +1869,20 @@ function renderProjectCountsChart(data) {
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        color: '#ffffff' // 设置Y轴刻度文字颜色为白色
+                        color: textColor // 根据当前模式设置Y轴刻度文字颜色
                     },
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.1)' // 设置Y轴网格线颜色为半透明白色
+                        color: gridColor // 根据当前模式设置Y轴网格线颜色
                     }
                 },
                 x: {
                     ticks: {
                         maxRotation: 45,
                         minRotation: 45,
-                        color: '#ffffff' // 设置X轴刻度文字颜色为白色
+                        color: textColor // 根据当前模式设置X轴刻度文字颜色
                     },
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.1)' // 设置X轴网格线颜色为半透明白色
+                        color: gridColor // 根据当前模式设置X轴网格线颜色
                     }
                 }
             },
@@ -1677,17 +1890,18 @@ function renderProjectCountsChart(data) {
                 legend: {
                     position: 'top',
                     labels: {
-                        color: '#ffffff' // 设置图例文字颜色为白色
+                        color: textColor // 根据当前模式设置图例文字颜色
                     }
                 },
                 title: {
                     display: true,
                     text: '项目上榜次数Top 10',
-                    color: '#ffffff' // 设置标题文字颜色为白色
+                    color: textColor // 根据当前模式设置标题文字颜色
                 },
                 tooltip: {
-                    titleColor: '#ffffff', // 设置工具提示标题颜色为白色
-                    bodyColor: '#ffffff' // 设置工具提示内容颜色为白色
+                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
                 }
             }
         }
@@ -1803,7 +2017,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // 检查认证状态
             if (!isAuthenticated) {
                 console.error('认证状态为false，弹出登录框');
-                showToast('请先登录管理员账号', 'warning');
+                // 只显示登录模态框，不显示Toast提示，避免重复提示
                 loginModal.show();
                 return;
             }
@@ -1843,17 +2057,27 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
             
-            // 构建Basic Auth凭据
-            const basicAuth = btoa(`${credentials.username}:${credentials.password}`);
+            // 构建请求数据（使用请求体认证，与登录时相同）
+            const requestData = {
+                username: credentials.username,
+                password: credentials.password
+            };
+            console.log('发送的认证数据:', requestData);
+            
+            // 构建请求头
+            const headers = {
+                'Content-Type': 'application/json'
+            };
+            console.log('完整的请求头:', headers);
             
             // 发送爬取请求
             console.log('发送爬取请求');
-            const response = await fetch('http://localhost:8000/api/update/trending/update', {
+            console.log('请求URL:', `${API_BASE_URL}/api/update/trending/update`);
+            const response = await fetch(`${API_BASE_URL}/api/update/trending/update`, {
                 method: 'POST',
-                headers: {
-                    'Authorization': `Basic ${basicAuth}`,
-                    'Content-Type': 'application/json'
-                }
+                headers: headers,
+                body: JSON.stringify(requestData),
+                credentials: 'include' // 添加此选项，确保跨域请求能够正确发送认证凭据
             });
             
             console.log('请求响应状态:', response.status);
