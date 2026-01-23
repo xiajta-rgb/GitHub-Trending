@@ -299,6 +299,14 @@ p {
     overflow: hidden;
 }
 
+/* 饼状图卡片样式 - 调整高度以避免模块错乱排列 */
+.dashboard-module[data-module="top-languages"] .card-body {
+    height: 768px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .dashboard-card:hover {
     box-shadow: var(--shadow-lg);
     transform: translateY(-2px);

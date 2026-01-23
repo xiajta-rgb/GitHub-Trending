@@ -1485,7 +1485,7 @@ function renderTopTopicsChart(data) {
     
     // 处理空数据
     if (!data || data.length === 0) {
-        topTopicsChart = new Chart(ctx, {
+        topLanguagesChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['暂无数据'],
@@ -1551,6 +1551,112 @@ function renderTopTopicsChart(data) {
         }
         return colors;
     };
+    
+    const labels = data.map(item => item.week);
+    const projectCounts = data.map(item => item.count);
+    
+    weeklyProjectsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '新上榜项目数',
+                data: projectCounts,
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: textColor // 根据当前模式设置图例文字颜色
+                    }
+                },
+                title: {
+                    display: true,
+                    text: '每周新上榜项目数量趋势',
+                    color: textColor // 根据当前模式设置标题文字颜色
+                },
+                tooltip: {
+                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: gridColor // 根据当前模式设置网格线颜色
+                    },
+                    ticks: {
+                        color: textColor // 根据当前模式设置刻度文字颜色
+                    }
+                },
+                x: {
+                    grid: {
+                        color: gridColor // 根据当前模式设置网格线颜色
+                    },
+                    ticks: {
+                        color: textColor // 根据当前模式设置刻度文字颜色
+                    }
+                }
+            }
+        }
+    });
+}
+
+// 渲染热门编程语言饼图
+function renderTopLanguagesChart(data) {
+    const ctx = document.getElementById('top-languages-chart').getContext('2d');
+    
+    // 获取当前模式
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    // 获取当前模式的文字颜色
+    const textColor = getChartTextColor();
+    const gridColor = getChartGridColor();
+    
+    // 处理空数据
+    if (!data || data.length === 0) {
+        topLanguagesChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['暂无数据'],
+                datasets: [{
+                    data: [1],
+                    backgroundColor: ['rgba(108, 117, 125, 0.6)'],
+                    borderColor: ['rgba(108, 117, 125, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: textColor // 根据当前模式设置图例文字颜色
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: '热门编程语言分布',
+                        color: textColor // 根据当前模式设置标题文字颜色
+                    },
+                    tooltip: {
+                        titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                        bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                        backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
+                    }
+                }
+            }
+        });
+        return;
+    }
     
     const labels = data.map(item => item.name);
     const counts = data.map(item => item.count);
@@ -1704,10 +1810,8 @@ function renderWeeklyProjectsChart(data) {
         return;
     }
     
-    const labels = data.map(item => `${item.year}年第${item.week}周`);
-    
-    // 使用每周新上榜项目数量
-    const newProjectsCounts = data.map(item => item.newProjectsCount || 0);
+    const labels = data.map(item => item.week);
+    const projectCounts = data.map(item => item.count);
     
     weeklyProjectsChart = new Chart(ctx, {
         type: 'bar',
@@ -1715,7 +1819,7 @@ function renderWeeklyProjectsChart(data) {
             labels: labels,
             datasets: [{
                 label: '新上榜项目数',
-                data: newProjectsCounts,
+                data: projectCounts,
                 backgroundColor: 'rgba(255, 99, 132, 0.6)',
                 borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1
@@ -1723,26 +1827,278 @@ function renderWeeklyProjectsChart(data) {
         },
         options: {
             responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: textColor // 根据当前模式设置图例文字颜色
+                    }
+                },
+                title: {
+                    display: true,
+                    text: '每周新上榜项目数量趋势',
+                    color: textColor // 根据当前模式设置标题文字颜色
+                },
+                tooltip: {
+                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
+                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
+                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
+                }
+            },
             scales: {
                 y: {
                     beginAtZero: true,
-                    ticks: {
-                        stepSize: 1,
-                        color: textColor // 根据当前模式设置Y轴刻度文字颜色
-                    },
                     grid: {
-                        color: gridColor // 根据当前模式设置Y轴网格线颜色
+                        color: gridColor // 根据当前模式设置网格线颜色
+                    },
+                    ticks: {
+                        color: textColor // 根据当前模式设置刻度文字颜色
                     }
                 },
                 x: {
-                    ticks: {
-                        color: textColor // 根据当前模式设置X轴刻度文字颜色
-                    },
                     grid: {
-                        color: gridColor // 根据当前模式设置X轴网格线颜色
+                        color: gridColor // 根据当前模式设置网格线颜色
+                    },
+                    ticks: {
+                        color: textColor // 根据当前模式设置刻度文字颜色
                     }
                 }
-            },
+            }
+        }
+    });
+}
+
+// 模块详情模态框元素
+const moduleDetailModal = new bootstrap.Modal(document.getElementById('module-detail-modal'));
+const moduleDetailContent = document.getElementById('module-detail-content');
+const moduleDetailModalLabel = document.getElementById('module-detail-modal-label');
+
+// 显示模块详情
+function showModuleDetail(moduleType) {
+    console.log('显示模块详情:', moduleType);
+    
+    // 获取统计数据
+    fetch(`${API_BASE_URL}/api/trending/statistics`)
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                const statistics = result.data;
+                let title = '';
+                let data = [];
+                let columns = [];
+                
+                // 根据模块类型设置标题、数据和列配置
+                switch (moduleType) {
+                    case 'top-topics':
+                        title = '热门主题分布详情';
+                        data = statistics.topTopics || [];
+                        columns = [
+                            { key: 'index', label: '序号' },
+                            { key: 'name', label: '主题' },
+                            { key: 'count', label: '出现次数' }
+                        ];
+                        break;
+                    case 'project-counts':
+                        title = '项目总数增长趋势详情';
+                        data = statistics.projectCounts || [];
+                        columns = [
+                            { key: 'index', label: '序号' },
+                            { key: 'name', label: '项目名称' },
+                            { key: 'count', label: '上榜次数' },
+                            { key: 'last_seen', label: '最后上榜时间' }
+                        ];
+                        break;
+                    case 'top-languages':
+                        title = '主要编程语言分布详情';
+                        data = statistics.topLanguages || [];
+                        columns = [
+                            { key: 'index', label: '序号' },
+                            { key: 'name', label: '语言' },
+                            { key: 'count', label: '出现次数' }
+                        ];
+                        break;
+                    case 'top-technologies':
+                        title = '主要技术栈分布详情';
+                        data = statistics.techStackTrends || [];
+                        columns = [
+                            { key: 'index', label: '序号' },
+                            { key: 'name', label: '技术栈' },
+                            { key: 'count', label: '出现次数' }
+                        ];
+                        break;
+                    case 'rankings':
+                        title = '项目上榜次数排行榜详情';
+                        data = statistics.projectCounts || [];
+                        columns = [
+                            { key: 'index', label: '排名' },
+                            { key: 'name', label: '项目名称' },
+                            { key: 'count', label: '上榜次数' },
+                            { key: 'last_seen', label: '最后上榜时间' }
+                        ];
+                        break;
+                    case 'precise-rankings':
+                        title = '精准度项目榜单详情';
+                        data = statistics.preciseRankings || [];
+                        columns = [
+                            { key: 'index', label: '排名' },
+                            { key: 'name', label: '项目名称' },
+                            { key: 'stars', label: 'Stars' },
+                            { key: 'forks', label: 'Forks' },
+                            { key: 'final_score', label: '最终得分' }
+                        ];
+                        break;
+                    default:
+                        title = '模块详情';
+                        break;
+                }
+                
+                // 分页配置
+                const pageSize = 50;
+                const totalPages = Math.ceil(data.length / pageSize);
+                let currentPage = 1;
+                
+                // 渲染页面数据
+                function renderPage(page) {
+                    const start = (page - 1) * pageSize;
+                    const end = start + pageSize;
+                    const pageData = data.slice(start, end);
+                    
+                    // 生成表格HTML
+                    let tableHtml = `<div class="table-responsive"><table class="table table-striped table-hover"><thead><tr>`;
+                    
+                    // 生成表头
+                    columns.forEach(col => {
+                        tableHtml += `<th>${col.label}</th>`;
+                    });
+                    
+                    tableHtml += `</tr></thead><tbody>`;
+                    
+                    // 生成表格内容
+                    pageData.forEach((item, index) => {
+                        tableHtml += `<tr>`;
+                        columns.forEach(col => {
+                            if (col.key === 'index') {
+                                tableHtml += `<td>${start + index + 1}</td>`;
+                            } else if (col.key === 'name' && item.name.includes('/')) {
+                                // 处理项目名称，只显示最后一部分
+                                tableHtml += `<td>${item.name.split('/').pop()}</td>`;
+                            } else if (col.key === 'final_score') {
+                                // 格式化最终得分
+                                tableHtml += `<td>${item[col.key].toFixed(4)}</td>`;
+                            } else {
+                                tableHtml += `<td>${item[col.key] || '-'}</td>`;
+                            }
+                        });
+                        tableHtml += `</tr>`;
+                    });
+                    
+                    tableHtml += `</tbody></table></div>`;
+                    
+                    // 生成分页控件
+                    let paginationHtml = `
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="text-muted">
+                                共 ${data.length} 条记录，每页 ${pageSize} 条，共 ${totalPages} 页
+                            </div>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                                        <a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;">上一页</a>
+                                    </li>
+                    `;
+                    
+                    // 生成页码按钮
+                    const maxVisiblePages = 5;
+                    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+                    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+                    
+                    if (endPage - startPage + 1 < maxVisiblePages) {
+                        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+                    }
+                    
+                    for (let i = startPage; i <= endPage; i++) {
+                        paginationHtml += `
+                            <li class="page-item ${i === currentPage ? 'active' : ''}">
+                                <a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a>
+                            </li>
+                        `;
+                    }
+                    
+                    paginationHtml += `
+                                    <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                                        <a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">下一页</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    `;
+                    
+                    // 更新模态框内容
+                    moduleDetailContent.innerHTML = tableHtml + paginationHtml;
+                }
+                
+                // 切换页码
+                window.changePage = function(page) {
+                    if (page < 1 || page > totalPages) return;
+                    currentPage = page;
+                    renderPage(currentPage);
+                };
+                
+                // 设置模态框标题
+                moduleDetailModalLabel.textContent = title;
+                
+                // 渲染第一页
+                renderPage(currentPage);
+                
+                // 显示模态框
+                moduleDetailModal.show();
+            } else {
+                showToast('获取数据失败：' + result.error, 'error');
+            }
+        })
+        .catch(error => {
+            console.error('获取数据失败:', error);
+            showToast('获取数据失败：' + error.message, 'error');
+        });
+}
+
+// 为模块详情按钮添加点击事件监听器
+document.addEventListener('DOMContentLoaded', function() {
+    const moduleButtons = document.querySelectorAll('.module-popup-btn');
+    moduleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const moduleType = this.getAttribute('data-module');
+            showModuleDetail(moduleType);
+        });
+    });
+});
+
+// 渲染每周新上榜项目数量趋势图
+function renderWeeklyProjectsChart(data) {
+    const ctx = document.getElementById('weekly-projects-chart').getContext('2d');
+    
+    // 获取当前模式
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    // 获取当前模式的文字颜色
+    const textColor = getChartTextColor();
+    const gridColor = getChartGridColor();
+    
+    // 处理空数据
+    if (!data || data.length === 0) {
+        weeklyProjectsChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['暂无数据'],
+            datasets: [{
+                label: '新上榜项目数',
+                data: [0],
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
             plugins: {
                 legend: {
                     position: 'top',
@@ -1762,867 +2118,8 @@ function renderWeeklyProjectsChart(data) {
                 }
             }
         }
-    });
-}
-    
-// 渲染热门编程语言饼图
-function renderTopLanguagesChart(data) {
-    const ctx = document.getElementById('top-languages-chart').getContext('2d');
-    
-    // 获取当前模式
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    // 获取当前模式的文字颜色
-    const textColor = getChartTextColor();
-    
-    // 处理空数据
-    if (!data || data.length === 0) {
-        topLanguagesChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['暂无数据'],
-                datasets: [{
-                    data: [1],
-                    backgroundColor: ['#CCCCCC'],
-                    borderColor: textColor,
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            color: textColor // 根据当前模式设置图例文字颜色
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: '热门编程语言分布',
-                        color: textColor // 根据当前模式设置标题文字颜色
-                    },
-                    tooltip: {
-                        titleColor: textColor, // 根据当前模式设置工具提示标题颜色
-                        bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
-                        backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
-                    }
-                }
-            }
         });
         return;
     }
     
-    const labels = data.map(item => item.name);
-    const counts = data.map(item => item.count);
-    const backgroundColors = [
-        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
-        '#9966FF', '#FF9F40', '#C9CBCF', '#45B7D1'
-    ];
-    
-    topLanguagesChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: labels,
-            datasets: [{
-                data: counts,
-                backgroundColor: backgroundColors,
-                borderColor: textColor,
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: {
-                        color: textColor // 根据当前模式设置图例文字颜色
-                    }
-                },
-                title: {
-                    display: true,
-                    text: '热门编程语言分布',
-                    color: textColor // 根据当前模式设置标题文字颜色
-                },
-                tooltip: {
-                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
-                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
-                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)', // 根据当前模式设置工具提示背景颜色
-                    callbacks: {
-                        label: function(context) {
-                            const label = context.label || '';
-                            const value = context.raw || 0;
-                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                            const percentage = Math.round((value / total) * 100);
-                            return `${label}: ${value} 次 (${percentage}%)`;
-                        }
-                    }
-                }
-            }
-        }
-    });
-}
-    
-// 渲染热门技术栈柱状图
-function renderTopTechnologiesChart(data) {
-    const ctx = document.getElementById('top-technologies-chart').getContext('2d');
-    
-    // 获取当前模式
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    // 获取当前模式的文字颜色
-    const textColor = getChartTextColor();
-    const gridColor = getChartGridColor();
-    
-    // 处理空数据
-    if (!data || data.length === 0) {
-        topTechnologiesChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['暂无数据'],
-                datasets: [{
-                    label: '出现次数',
-                    data: [0],
-                    backgroundColor: 'rgba(153, 102, 255, 0.6)',
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            color: textColor // 根据当前模式设置图例文字颜色
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: '热门技术栈分布',
-                        color: textColor // 根据当前模式设置标题文字颜色
-                    },
-                    tooltip: {
-                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
-                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
-                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
-                }
-                }
-            }
-        });
-        return;
-    }
-    
-    const labels = data.map(item => item.name);
-    const counts = data.map(item => item.count);
-    
-    topTechnologiesChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: '出现次数',
-                data: counts,
-                backgroundColor: 'rgba(153, 102, 255, 0.6)',
-                borderColor: 'rgba(153, 102, 255, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        color: textColor // 根据当前模式设置Y轴刻度文字颜色
-                    },
-                    grid: {
-                        color: gridColor // 根据当前模式设置Y轴网格线颜色
-                    }
-                },
-                x: {
-                    ticks: {
-                        maxRotation: 45,
-                        minRotation: 45,
-                        color: textColor // 根据当前模式设置X轴刻度文字颜色
-                    },
-                    grid: {
-                        color: gridColor // 根据当前模式设置X轴网格线颜色
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    position: 'top',
-                    labels: {
-                        color: textColor // 根据当前模式设置图例文字颜色
-                    }
-                },
-                title: {
-                    display: true,
-                    text: '热门技术栈Top 10',
-                    color: textColor // 根据当前模式设置标题文字颜色
-                },
-                tooltip: {
-                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
-                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
-                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
-                }
-            }
-        }
-    });
-}
-    
-// 渲染项目上榜次数Top 10柱状图
-function renderProjectCountsChart(data) {
-    const ctx = document.getElementById('project-counts-chart').getContext('2d');
-    
-    // 获取当前模式
-    const isDarkMode = document.body.classList.contains('dark-mode');
-    // 获取当前模式的文字颜色
-    const textColor = getChartTextColor();
-    const gridColor = getChartGridColor();
-    
-    // 处理空数据
-    if (!data || data.length === 0) {
-        projectCountsChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['暂无数据'],
-                datasets: [{
-                    label: '上榜次数',
-                    data: [0],
-                    backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            color: textColor // 根据当前模式设置图例文字颜色
-                        }
-                    },
-                    title: {
-                        display: true,
-                        text: '项目上榜次数Top 10',
-                        color: textColor // 根据当前模式设置标题文字颜色
-                    },
-                    tooltip: {
-                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
-                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
-                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
-                }
-                }
-            }
-        });
-        return;
-    }
-    
-    const labels = data.map(item => item.name.replace(/.*\//, '')); // 只显示项目名
-    const counts = data.map(item => item.count);
-    
-    projectCountsChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: '上榜次数',
-                data: counts,
-                backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        color: textColor // 根据当前模式设置Y轴刻度文字颜色
-                    },
-                    grid: {
-                        color: gridColor // 根据当前模式设置Y轴网格线颜色
-                    }
-                },
-                x: {
-                    ticks: {
-                        maxRotation: 45,
-                        minRotation: 45,
-                        color: textColor // 根据当前模式设置X轴刻度文字颜色
-                    },
-                    grid: {
-                        color: gridColor // 根据当前模式设置X轴网格线颜色
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    position: 'top',
-                    labels: {
-                        color: textColor // 根据当前模式设置图例文字颜色
-                    }
-                },
-                title: {
-                    display: true,
-                    text: '项目上榜次数Top 10',
-                    color: textColor // 根据当前模式设置标题文字颜色
-                },
-                tooltip: {
-                    titleColor: textColor, // 根据当前模式设置工具提示标题颜色
-                    bodyColor: textColor, // 根据当前模式设置工具提示内容颜色
-                    backgroundColor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)' // 根据当前模式设置工具提示背景颜色
-                }
-            }
-        }
-    });
-}
-    
-// 切换到仪表盘
-dashboardLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    dashboardLink.classList.add('active');
-    latestLink.classList.remove('active');
-    historyLink.classList.remove('active');
-    latestSection.style.display = 'none';
-    dashboardSection.style.display = 'block';
-    historySection.style.display = 'none';
-    reportInfo.innerHTML = '';
-    // 确保更新UI，包括显示/隐藏更新按钮
-    updateAuthUI();
-    getStatistics();
-});
-    
-// 切换到历史数据
-historyLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    historyLink.classList.add('active');
-    latestLink.classList.remove('active');
-    dashboardLink.classList.remove('active');
-    latestSection.style.display = 'none';
-    dashboardSection.style.display = 'none';
-    historySection.style.display = 'block';
-    reportInfo.innerHTML = '';
-    // 确保更新UI，包括显示/隐藏更新按钮
-    updateAuthUI();
-    getHistoryList();
-});
-
-// 显示模块详情
-function showModuleDetail(moduleType) {
-    console.log('显示模块详情:', moduleType);
-    
-    // 获取统计数据
-    fetch(`${API_BASE_URL}/api/trending/statistics`)  // 直接使用相对路径
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                const statistics = result.data;
-                let html = '';
-                let title = '';
-                
-                switch (moduleType) {
-                    case 'top-topics':
-                            title = '热门主题分布详情';
-                            if (statistics.topTopics && statistics.topTopics.length > 0) {
-                                html = '<table class="table table-striped"><thead><tr><th>序号</th><th>主题</th><th>出现次数</th></tr></thead><tbody>';
-                                statistics.topTopics.slice(0, 50).forEach((topic, index) => {
-                                    html += `<tr><td>${index + 1}</td><td>${topic.name}</td><td>${topic.count}</td></tr>`;
-                                });
-                                html += '</tbody></table>';
-                            } else {
-                                html = '<div class="text-center">暂无主题数据</div>';
-                            }
-                            break;
-                    case 'project-counts':
-                        title = '项目总数增长趋势详情';
-                        if (statistics.weeklyProjects && statistics.weeklyProjects.length > 0) {
-                            html = '<table class="table table-striped"><thead><tr><th>序号</th><th>年份</th><th>周数</th><th>项目数</th><th>新项目数</th></tr></thead><tbody>';
-                            statistics.weeklyProjects.slice(0, 50).forEach((week, index) => {
-                                html += `<tr><td>${index + 1}</td><td>${week.year}</td><td>${week.week}</td><td>${week.projectsCount}</td><td>${week.newProjectsCount}</td></tr>`;
-                            });
-                            html += '</tbody></table>';
-                        } else {
-                            html = '<div class="text-center">暂无项目数据</div>';
-                        }
-                        break;
-                    case 'top-languages':
-                        title = '热门编程语言分布详情';
-                        if (statistics.topLanguages && statistics.topLanguages.length > 0) {
-                            html = '<table class="table table-striped"><thead><tr><th>序号</th><th>语言</th><th>出现次数</th></tr></thead><tbody>';
-                            statistics.topLanguages.slice(0, 50).forEach((language, index) => {
-                                html += `<tr><td>${index + 1}</td><td>${language.name}</td><td>${language.count}</td></tr>`;
-                            });
-                            html += '</tbody></table>';
-                        } else {
-                            html = '<div class="text-center">暂无语言数据</div>';
-                        }
-                        break;
-                    case 'top-technologies':
-                        title = '热门技术栈分布详情';
-                        if (statistics.techStackTrends && statistics.techStackTrends.length > 0) {
-                            html = '<table class="table table-striped"><thead><tr><th>序号</th><th>技术栈</th><th>出现次数</th></tr></thead><tbody>';
-                            statistics.techStackTrends.slice(0, 50).forEach((tech, index) => {
-                                html += `<tr><td>${index + 1}</td><td>${tech.name}</td><td>${tech.count}</td></tr>`;
-                            });
-                            html += '</tbody></table>';
-                        } else {
-                            html = '<div class="text-center">暂无技术栈数据</div>';
-                        }
-                        break;
-                    case 'rankings':
-                        title = '项目上榜次数详情';
-                        if (statistics.projectCounts && statistics.projectCounts.length > 0) {
-                            html = '<table class="table table-striped"><thead><tr><th>序号</th><th>项目</th><th>上榜次数</th><th>最后上榜时间</th></tr></thead><tbody>';
-                            statistics.projectCounts.slice(0, 50).forEach((project, index) => {
-                                html += `<tr><td>${index + 1}</td><td>${project.name.split('/').pop()}</td><td>${project.count}</td><td>${project.last_seen || '未知'}</td></tr>`;
-                            });
-                            html += '</tbody></table>';
-                        } else {
-                            html = '<div class="text-center">暂无项目数据</div>';
-                        }
-                        break;
-                    case 'precise-rankings':
-                        title = '精准度项目榜单详情';
-                        if (statistics.preciseRankings && statistics.preciseRankings.length > 0) {
-                            html = '<table class="table table-striped"><thead><tr><th>序号</th><th>项目</th><th>Stars</th><th>Forks</th><th>最终得分</th></tr></thead><tbody>';
-                            statistics.preciseRankings.slice(0, 50).forEach((project, index) => {
-                                html += `<tr><td>${index + 1}</td><td>${project.name}</td><td>${project.stars}</td><td>${project.forks}</td><td>${project.final_score.toFixed(4)}</td></tr>`;
-                            });
-                            html += '</tbody></table>';
-                        } else {
-                            html = '<div class="text-center">暂无项目数据</div>';
-                        }
-                        break;
-                    default:
-                        title = '模块详情';
-                        html = '<div class="text-center">暂无数据</div>';
-                }
-                
-                // 创建模态框
-                const modal = document.createElement('div');
-                modal.className = 'modal fade';
-                modal.id = 'module-modal';
-                modal.tabIndex = '-1';
-                modal.role = 'dialog';
-                modal.setAttribute('aria-labelledby', 'module-modal-label');
-                modal.setAttribute('aria-hidden', 'true');
-                
-                modal.innerHTML = `
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="module-modal-label">${title}</h5>
-                                </div>
-                                <div class="modal-body">
-                                    ${html}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
-                                    <button type="button" class="btn btn-success export-excel-btn">导出为EXCEL</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                
-                // 添加到DOM
-                document.body.appendChild(modal);
-                
-                // 显示模态框
-                    const moduleModal = new bootstrap.Modal(modal);
-                    moduleModal.show();
-                    
-                    // 添加导出为EXCEL按钮的事件监听器
-                    modal.querySelector('.export-excel-btn').addEventListener('click', function() {
-                        const table = modal.querySelector('table');
-                        if (table) {
-                            exportTableToExcel(table, title);
-                        }
-                    });
-                    
-                    // 监听模态框关闭事件，移除模态框
-                    modal.addEventListener('hidden.bs.modal', function () {
-                        setTimeout(() => {
-                            document.body.removeChild(modal);
-                        }, 100);
-                    });
-            }
-        })
-        .catch(error => {
-            console.error('获取统计数据失败:', error);
-            showToast('获取数据失败：' + error.message, 'error');
-        });
-}
-
-
-
-// 获取语言对应的颜色
-function getLanguageColor(language) {
-    const colors = {
-        'JavaScript': '#f1e05a',
-        'TypeScript': '#2b7489',
-        'Python': '#3572A5',
-        'Java': '#b07219',
-        'C++': '#f34b7d',
-        'C#': '#178600',
-        'PHP': '#4F5D95',
-        'Go': '#00ADD8',
-        'Rust': '#dea584',
-        'Swift': '#ffac45',
-        'Kotlin': '#F18E33',
-        'Ruby': '#701516',
-        'Shell': '#89e051',
-        'HTML': '#e34c26',
-        'CSS': '#563d7c',
-        'SCSS': '#c6538c',
-        'Vue': '#41b883',
-        'React': '#61dafb',
-        'Django': '#092e20',
-        'Angular': '#dd0031'
-    };
-    return colors[language] || '#6e6e6e';
-}
-
-// 导出表格为Excel文件
-function exportTableToExcel(table, filename) {
-    // 创建一个新的工作簿
-    const wb = XLSX.utils.book_new();
-    // 将HTML表格转换为工作表
-    const ws = XLSX.utils.table_to_sheet(table);
-    // 将工作表添加到工作簿
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    // 将工作簿保存为Excel文件
-    XLSX.writeFile(wb, `${filename}.xlsx`);
-}
-
-// 页面加载完成后获取最新数据和初始化按钮事件
-document.addEventListener('DOMContentLoaded', async () => {
-    console.log('DOM加载完成');
-    
-    // 检查并记录当前认证状态
-    checkAuthStatus();
-    console.log('当前认证状态:', isAuthenticated, '管理员用户:', adminUser);
-    
-    // 获取最新数据
-    await getLatestTrendingData();
-    
-    // 获取所有需要的元素
-    const updateBtn = document.getElementById('update-data-btn');
-    const loading = document.getElementById('loading');
-    const repoList = document.getElementById('repo-list');
-    const searchBtn = document.getElementById('search-btn');
-    const historySearch = document.getElementById('history-search');
-    const batchDeleteBtn = document.getElementById('batch-delete-btn');
-    const clearSearchBtn = document.getElementById('clear-search');
-    darkModeToggle = document.getElementById('dark-mode-toggle');
-    console.log('darkModeToggle:', darkModeToggle);
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', toggleDarkMode);
-    }
-    
-    // 绑定管理员登录按钮事件
-    if (adminLoginBtn) {
-        adminLoginBtn.addEventListener('click', () => {
-            console.log('管理员登录按钮被点击');
-            loginModal.show();
-        });
-    }
-    
-    if (!updateBtn) {
-        console.error('未找到爬取按钮');
-        return;
-    }
-    
-    // 绑定更新按钮点击事件监听器
-    updateBtn.addEventListener('click', async () => {
-        console.log('爬取按钮被点击 - 事件监听器');
-        
-        // 检查并记录当前认证状态
-        checkAuthStatus();
-        console.log('点击爬取按钮时的认证状态:', isAuthenticated, '管理员用户:', adminUser);
-        
-        try {
-            // 检查认证状态
-            if (!isAuthenticated) {
-                console.error('认证状态为false，弹出登录框');
-                // 只显示登录模态框，不显示Toast提示，避免重复提示
-                loginModal.show();
-                return;
-            }
-            
-            // 显示加载状态
-            if (loading) {
-                loading.style.display = 'block';
-            }
-            if (repoList) {
-                repoList.innerHTML = '';
-            }
-            
-            // 更新按钮状态
-            if (updateBtn) {
-                updateBtn.disabled = true;
-                updateBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> 爬取中...';
-            }
-            
-            // 获取管理员凭据
-            const authData = sessionStorage.getItem('admin-auth');
-            const credentials = JSON.parse(authData);
-            
-            // 检查是否包含密码
-            if (!credentials.password) {
-                console.error('认证数据中没有密码，需要重新登录');
-                showToast('请重新登录以获取最新数据', 'warning');
-                loginModal.show();
-                
-                // 恢复按钮状态
-                if (updateBtn) {
-                    updateBtn.disabled = false;
-                    updateBtn.innerHTML = '<i class="fa fa-refresh"></i> 爬取数据';
-                }
-                if (loading) {
-                    loading.style.display = 'none';
-                }
-                return;
-            }
-            
-            // 构建请求数据（使用请求体认证，与登录时相同）
-            const requestData = {
-                username: credentials.username,
-                password: credentials.password
-            };
-            console.log('发送的认证数据:', requestData);
-            
-            // 构建请求头
-            const headers = {
-                'Content-Type': 'application/json'
-            };
-            console.log('完整的请求头:', headers);
-            
-            // 发送爬取请求
-            console.log('发送爬取请求');
-            console.log('请求URL:', `${API_BASE_URL}/api/update/trending/update`);
-            const response = await fetch(`${API_BASE_URL}/api/update/trending/update`, {
-                method: 'POST',
-                headers: headers,
-                body: JSON.stringify(requestData),
-                credentials: 'include' // 添加此选项，确保跨域请求能够正确发送认证凭据
-            });
-            
-            console.log('请求响应状态:', response.status);
-            const result = await response.json();
-            console.log('响应结果:', result);
-            
-            if (result.success) {
-                // 爬取成功，重新加载数据
-                await getLatestTrendingData();
-                
-                // 显示成功消息
-                showToast('数据爬取完成！', 'success');
-            } else {
-                // 如果返回401状态码，显示需要登录的提示
-                if (response.status === 401) {
-                    showToast('更新失败：请先登录管理员账号', 'warning');
-                    loginModal.show();
-                } else {
-                    showToast('爬取失败: ' + (result.error || '未知错误'), 'error');
-                }
-            }
-        } catch (error) {
-            console.error('爬取失败:', error);
-            showToast('爬取失败: ' + error.message, 'error');
-        } finally {
-            // 恢复按钮状态
-            if (updateBtn) {
-                updateBtn.disabled = false;
-                updateBtn.innerHTML = '<i class="fa fa-refresh"></i> 爬取数据';
-            }
-            
-            // 隐藏加载状态
-            if (loading) {
-                loading.style.display = 'none';
-            }
-        }
-    });
-    
-    // 绑定AI解读按钮点击事件监听器
-    if (aiInterpretBtn) {
-        aiInterpretBtn.addEventListener('click', async () => {
-            console.log('AI解读按钮被点击');
-            
-            // 检查是否有数据
-            if (currentRepositories.length === 0) {
-                showToast('没有可解读的数据，请先获取最新数据', 'warning');
-                return;
-            }
-            
-            // 显示加载状态
-            loading.style.display = 'block';
-            aiInterpretBtn.disabled = true;
-            aiInterpretBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> 解读中...';
-            
-            try {
-                // 准备提示词
-                const prompt = `请分析以下GitHub热门项目的标题和描述，进行功能分类，提供应用建议和趋势解读：\n\n${currentRepositories.slice(0, 10).map((repo, index) => {
-                    return `${index + 1}. ${repo.name} - ${repo.description || '无描述'}`;
-                }).join('\n')}`;
-                
-                // 调用AI模型
-                const interpretation = await callZhipuModel(prompt);
-                
-                // 解析markdown为HTML
-                const htmlContent = marked.parse(interpretation);
-                
-                // 显示解读结果
-                aiInterpretationModalContent.innerHTML = htmlContent;
-                aiInterpretationModal.show();
-                
-            } catch (error) {
-                console.error('AI解读失败:', error);
-                showToast('AI解读失败: ' + error.message, 'error');
-            } finally {
-                // 恢复按钮状态
-                aiInterpretBtn.disabled = false;
-                aiInterpretBtn.innerHTML = '<i class="fa fa-robot"></i> AI解读';
-                hideLoading();
-            }
-        });
-    }
-    
-    // 绑定搜索按钮点击事件监听器
-    if (searchBtn) {
-        searchBtn.addEventListener('click', () => {
-            searchHistory();
-        });
-    }
-    
-    // 绑定搜索框回车键事件
-    if (historySearch) {
-        historySearch.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                searchHistory();
-            }
-        });
-        
-        // 监听搜索框输入事件，控制清空按钮显示
-        historySearch.addEventListener('input', () => {
-            if (clearSearchBtn) {
-                clearSearchBtn.style.display = historySearch.value ? 'inline-block' : 'none';
-            }
-        });
-    }
-    
-    // 绑定清空搜索框按钮事件
-    if (clearSearchBtn) {
-        clearSearchBtn.addEventListener('click', () => {
-            if (historySearch) {
-                historySearch.value = '';
-                clearSearchBtn.style.display = 'none';
-                searchHistory(); // 清空后重新搜索（显示全部）
-            }
-        });
-    }
-    
-    // 绑定批量删除按钮点击事件监听器
-    if (batchDeleteBtn) {
-        batchDeleteBtn.addEventListener('click', async () => {
-            await batchDeleteHistoryData();
-        });
-    }
-    
-    // 检查夜间模式偏好
-    checkDarkModePreference();
-    
-    // 初始化AI解读模态框
-    const aiInterpretationModal = new bootstrap.Modal(document.getElementById('ai-interpretation-modal'));
-    const aiInterpretationModalContent = document.getElementById('ai-interpretation-content');
-    
-    // 显示模块详情
-    
-    
-    // 导出表格为Excel文件
-    function exportTableToExcel(table, filename) {
-        const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.table_to_sheet(table);
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-        XLSX.writeFile(workbook, `${filename}.xlsx`);
-    }
-    
-    // 绑定模块详情按钮点击事件监听器
-    document.querySelectorAll('.module-popup-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const moduleType = this.getAttribute('data-module');
-            showModuleDetail(moduleType);
-        });
-    });
-    
-    // 绑定AI解读按钮点击事件监听器
-    document.querySelectorAll('.ai-interpret-btn').forEach(btn => {
-        btn.addEventListener('click', async function() {
-            const moduleType = this.getAttribute('data-module');
-            
-            if (moduleType === 'precise-rankings') {
-                await interpretPreciseRankings();
-            }
-        });
-    });
-});
-
-// 解读精准度项目榜单
-async function interpretPreciseRankings() {
-    showLoading();
-    
-    try {
-        // 获取精准度榜单数据
-        const response = await fetch(`${API_BASE_URL}/api/trending/statistics`);
-        const result = await response.json();
-        
-        if (result.success) {
-            const statistics = result.data;
-            
-            if (statistics.preciseRankings && statistics.preciseRankings.length > 0) {
-                // 获取前20名项目
-                const top20Projects = statistics.preciseRankings.slice(0, 20);
-                
-                // 准备提示词
-                const prompt = `请分析以下GitHub精准度项目榜单前20名的项目，进行功能分类，提供应用建议和趋势解读：\n\n${top20Projects.map((project, index) => {
-                    return `${index + 1}. ${project.name} - ${project.description || '无描述'}`;
-                }).join('\n')}`;
-                
-                // 显示加载状态
-                showToast('正在分析项目数据...', 'info');
-                
-                // 调用AI模型
-                const interpretation = await callZhipuModel(prompt);
-                
-                // 解析markdown为HTML
-                const htmlContent = marked.parse(interpretation);
-                
-                // 显示解读结果
-                const modalContent = document.getElementById('ai-interpretation-modal-content');
-                const modal = new bootstrap.Modal(document.getElementById('ai-interpretation-modal'));
-                
-                if (modalContent) {
-                    modalContent.innerHTML = htmlContent;
-                    modal.show();
-                } else {
-                    showToast('AI解读模态框元素未找到', 'error');
-                }
-            } else {
-                showToast('暂无精准度榜单数据', 'warning');
-            }
-        } else {
-            showToast('获取数据失败：' + result.error, 'error');
-        }
-    } catch (error) {
-        console.error('AI解读失败:', error);
-        showToast('AI解读失败: ' + error.message, 'error');
-    } finally {
-        hideLoading();
-    }
-}
-
-// 调用智谱AI模型（已在文件开头定义）
-// 注意：这里复用了文件开头定义的callZhipuModel函数，该函数已经实现了与智谱大模型的真实API调用
+    const labels = data.map
