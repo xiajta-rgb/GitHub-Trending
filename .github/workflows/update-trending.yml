@@ -1,12 +1,10 @@
 name: Update GitHub Trending
 
-# 工作流触发条件
 on:
-  # 定时触发：每周一凌晨2点（UTC时间）执行
+  # 每天北京时间8点执行（UTC 0点）
   schedule:
-    - cron: '0 2 * * 1'  # 每周一 02:00 UTC
-  
-  # 手动触发
+    - cron: '0 0 * * *'
+  # 手动触发（默认时间范围同步为daily）
   workflow_dispatch:
     inputs:
       repo_limit:
@@ -22,17 +20,19 @@ on:
       since:
         description: '时间范围'
         required: false
-        default: 'weekly'
+        default: 'daily'  # 手动触发默认也用daily
         type: choice
         options:
           - daily
           - weekly
           - monthly
 
-# 环境变量
 env:
   NODE_VERSION: '20'
   TIMEZONE: 'Asia/Shanghai'
+  DEFAULT_REPO_LIMIT: '10'
+  DEFAULT_LANGUAGE: ''
+  DEFAULT_SINCE: 'daily'  # 定时执行的默认时间范围
 
 jobs:
   update-trending:
