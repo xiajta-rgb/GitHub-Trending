@@ -1,10 +1,12 @@
 name: Update GitHub Trending
 
+# 工作流触发条件
 on:
-  # 每天北京时间8点执行（UTC 0点）
+  # 定时触发：每周一凌晨2点（UTC时间）执行
   schedule:
-    - cron: '0 0 * * *'
-  # 手动触发（默认时间范围同步为daily）
+    - cron: '0 2 * * 1'  # 每周一 02:00 UTC
+  
+  # 手动触发
   workflow_dispatch:
     inputs:
       repo_limit:
@@ -12,27 +14,11 @@ on:
         required: false
         default: '10'
         type: string
-      language:
-        description: '编程语言过滤（留空=所有语言）'
-        required: false
-        default: ''
-        type: string
-      since:
-        description: '时间范围'
-        required: false
-        default: 'daily'  # 手动触发默认也用daily
-        type: choice
-        options:
-          - daily
-          - weekly
-          - monthly
 
+# 环境变量
 env:
-  NODE_VERSION: '20'
+  PYTHON_VERSION: '3.11'
   TIMEZONE: 'Asia/Shanghai'
-  DEFAULT_REPO_LIMIT: '10'
-  DEFAULT_LANGUAGE: ''
-  DEFAULT_SINCE: 'daily'  # 定时执行的默认时间范围
 
 jobs:
   update-trending:
@@ -56,20 +42,20 @@ jobs:
           # 使用GitHub Token进行认证
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # 2. 设置Node.js环境
-      - name: 🔧 Setup Node.js
-        uses: actions/setup-node@v4
+      # 2. 设置Python环境
+      - name: 🔧 Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          # 移除缓存配置，直接安装依赖
+          python-version: ${{ env.PYTHON_VERSION }}
 
       # 3. 安装依赖
       - name: 📦 Install dependencies
         run: |
-          if [ -f package-lock.json ]; then
-            npm ci
+          echo "安装Python依赖..."
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
           else
-            npm install
+            echo "警告: 未找到requirements.txt文件"
           fi
 
       # 4. 设置时区
@@ -83,46 +69,24 @@ jobs:
         run: |
           echo "🔍 检查环境变量..."
           echo "GITHUB_TOKEN: ${GITHUB_TOKEN:0:10}..."
-          echo "SILICONFLOW_API_KEY: ${SILICONFLOW_API_KEY:0:10}..."
-          echo "AI_BASE_URL: $AI_BASE_URL"
-          echo "AI_MODEL: $AI_MODEL"
           echo ""
-          node scripts/update-trending.js --check
+          echo "检查Python环境..."
+          python --version
+          pip --version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
-          AI_BASE_URL: ${{ secrets.AI_BASE_URL || 'https://api.siliconflow.cn/v1' }}
-          AI_MODEL: ${{ secrets.AI_MODEL || 'Pro/moonshotai/Kimi-K2-Instruct' }}
 
       # 6. 执行趋势更新
       - name: 🚀 Update trending repositories
         run: |
-          # 构建命令参数
-          COMMAND="node scripts/update-trending.js"
-          
-          # 添加手动触发的参数
-          if [ "${REPO_LIMIT}" != "" ]; then
-            COMMAND="$COMMAND --limit $REPO_LIMIT"
-          fi
-          
-          if [ "${LANGUAGE}" != "" ]; then
-            COMMAND="$COMMAND --language $LANGUAGE"
-          fi
-          
-          if [ "${SINCE}" != "" ]; then
-            COMMAND="$COMMAND --since $SINCE"
-          fi
-          
-          echo "执行命令: $COMMAND"
-          $COMMAND
+          # 执行Python脚本更新趋势数据
+          echo "执行趋势更新脚本..."
+          python daily_update.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
           AI_BASE_URL: ${{ secrets.AI_BASE_URL || 'https://api.siliconflow.cn/v1' }}
           AI_MODEL: ${{ secrets.AI_MODEL || 'Pro/moonshotai/Kimi-K2-Instruct' }}
-          REPO_LIMIT: ${{ github.event.inputs.repo_limit || '' }}
-          LANGUAGE: ${{ github.event.inputs.language || '' }}
-          SINCE: ${{ github.event.inputs.since || '' }}
 
       # 7. 检查是否有变更
       - name: 📋 Check for changes
@@ -147,11 +111,7 @@ jobs:
           git config --local user.name "GitHub Action"
           
           # 获取当前周信息
-          WEEK_INFO=$(node -e "
-            const moment = require('moment');
-            const now = moment();
-            console.log(\`\${now.year()}年第\${now.week()}周\`);
-          ")
+          WEEK_INFO=$(date +"%Y年第%V周")
           
           # 生成提交信息
           COMMIT_MSG="📊 更新GitHub趋势排行榜 - $WEEK_INFO
@@ -174,41 +134,7 @@ jobs:
           git push origin main
           echo "✅ 变更已推送到远程仓库"
 
-      # 10. 清理过期数据（每月第一周执行）
-      - name: 🧹 Cleanup old data
-        if: steps.changes.outputs.changes == 'true'
-        run: |
-          # 检查是否是月初第一周
-          WEEK_OF_MONTH=$(node -e "
-            const moment = require('moment');
-            const weekOfMonth = Math.ceil(moment().date() / 7);
-            console.log(weekOfMonth);
-          ")
-          
-          if [ "$WEEK_OF_MONTH" = "1" ]; then
-            echo "🗓️ 月初第一周，执行数据清理..."
-            node scripts/update-trending.js --cleanup
-            
-            # 如果有清理变更，也提交
-            git add .
-            if ! git diff --staged --quiet; then
-              git commit -m "🧹 清理过期数据
-
-              🤖 由GitHub Actions自动执行
-              📅 清理时间: $(date '+%Y-%m-%d %H:%M:%S %Z')"
-              git push origin main
-              echo "✅ 数据清理完成并已提交"
-            fi
-          else
-            echo "⏭️ 非月初第一周，跳过数据清理"
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
-          AI_BASE_URL: ${{ secrets.AI_BASE_URL || 'https://api.siliconflow.cn/v1' }}
-          AI_MODEL: ${{ secrets.AI_MODEL || 'Pro/moonshotai/Kimi-K2-Instruct' }}
-
-      # 11. 生成报告摘要
+      # 10. 生成报告摘要
       - name: 📊 Generate summary
         if: steps.changes.outputs.changes == 'true'
         run: |
@@ -224,15 +150,12 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "### ⚙️ 执行参数" >> $GITHUB_STEP_SUMMARY
             echo "- **项目数量**: ${{ github.event.inputs.repo_limit || '10' }}" >> $GITHUB_STEP_SUMMARY
-            echo "- **编程语言**: ${{ github.event.inputs.language || '全部' }}" >> $GITHUB_STEP_SUMMARY
-            echo "- **时间范围**: ${{ github.event.inputs.since || 'weekly' }}" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
           fi
           
           echo "### 🔗 查看结果" >> $GITHUB_STEP_SUMMARY
           echo "- [📖 查看README](../README.md)" >> $GITHUB_STEP_SUMMARY
           echo "- [📂 历史数据](../archives/)" >> $GITHUB_STEP_SUMMARY
-          echo "- [🖼️ 项目图片](../images/)" >> $GITHUB_STEP_SUMMARY
 
   # 错误处理和通知作业
   notify-on-failure:
