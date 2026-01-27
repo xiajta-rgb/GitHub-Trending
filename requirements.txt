@@ -7,3 +7,4 @@ bcrypt>=4.0.0  # 用于密码哈希
 sqlalchemy>=2.0.0  # 数据库ORM
 fastapi>=0.100.0  # Web框架
 uvicorn>=0.22.0  # ASGI服务器
+playwright>=1.40.0
